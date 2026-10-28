@@ -1,0 +1,28 @@
+IBS WORLD — SOCIAL + TRADUCTION
+Créateur : ISAAC BABYSON GUY
+Origine mise en avant : Kiseguro, Rutshuru, Nord-Kivu, RDC
+Version prototype PWA 0.2
+
+CONTENU
+- index.html : interface web mobile
+- manifest.json : paramètres d'installation web
+- service-worker.js : cache de base
+- icons/ : icônes 192 et 512 px
+
+INSTALLATION / TEST
+1. Décompresse le ZIP.
+2. Téléverse TOUS les fichiers et le dossier icons dans ton dépôt web.
+3. Active l'hébergement HTTPS compatible (ex. GitHub Pages si l'usage respecte ses conditions).
+4. Ouvre l'adresse HTTPS dans Chrome Android.
+5. Menu Chrome ⋮ > Installer l'application ou Ajouter à l'écran d'accueil, si proposé.
+
+LIMITES IMPORTANTES
+Cette version est un prototype, pas encore un réseau social complet :
+- Les publications, réactions et commentaires sont enregistrés localement dans ce navigateur.
+- Les vrais comptes sécurisés, amis, messages en direct, synchronisation entre utilisateurs et stockage partagé de médias ne sont pas connectés.
+- Le moteur de traduction automatique n'est pas connecté. La dictée et la synthèse vocale dépendent du navigateur.
+- Ce ZIP n'est pas un APK Android natif.
+- Le cache hors ligne ne crée pas des fonctions serveur qui ne sont pas encore présentes.
+
+PROCHAINE ÉTAPE
+Connecter un backend sécurisé (par exemple Supabase ou équivalent), configurer l'authentification, les règles d'accès, le stockage des médias et un moteur de traduction. Ne place jamais de clés secrètes dans le code public.
