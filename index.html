@@ -38,10 +38,11 @@
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            padding-top: 110px;
-            padding-bottom: 30px;
+            padding-top: 106px;
+            padding-bottom: 20px;
         }
 
+        /* HEADER FIXE */
         header {
             position: fixed;
             top: 0;
@@ -64,19 +65,7 @@
             cursor: pointer;
         }
 
-        .search-bar {
-            background: var(--bg-main);
-            border-radius: 20px;
-            padding: 6px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            width: 140px;
-        }
-
-        .header-right {
+        .header-actions {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -96,7 +85,7 @@
             font-size: 1rem;
         }
 
-        .user-top-avatar {
+        .user-avatar-top {
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -105,12 +94,13 @@
             border: 2px solid var(--primary);
         }
 
+        /* BARRE D'ONGLETS SUPERIEURE */
         .top-tabs {
             position: fixed;
             top: 56px;
             left: 0;
             right: 0;
-            height: 48px;
+            height: 50px;
             background: var(--bg-card);
             border-bottom: 1px solid var(--border-color);
             display: flex;
@@ -145,14 +135,15 @@
             background: var(--primary);
         }
 
-        .page {
+        /* PAGES ET CONTENUS */
+        .page-content {
             display: none;
             max-width: 650px;
             margin: 0 auto;
             padding: 12px;
         }
 
-        .page.active {
+        .page-content.active {
             display: block;
         }
 
@@ -164,7 +155,7 @@
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
 
-        .verified-badge-petrole {
+        .verified-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -177,7 +168,8 @@
             margin-left: 4px;
         }
 
-        .speaker-card {
+        /* TRADUCTION VOCALE (DUAL MIC) */
+        .speaker-box {
             border: 2px solid var(--primary);
             border-radius: 12px;
             padding: 16px;
@@ -186,12 +178,12 @@
             text-align: center;
         }
 
-        .speaker-card.person-b {
+        .speaker-box.person-b {
             border-color: #2b9348;
             background: rgba(43, 147, 72, 0.03);
         }
 
-        .mic-btn-main {
+        .mic-button {
             width: 70px;
             height: 70px;
             border-radius: 50%;
@@ -207,12 +199,12 @@
             box-shadow: 0 4px 10px rgba(24, 119, 242, 0.3);
         }
 
-        .mic-btn-main.green {
+        .mic-button.green {
             background: #2b9348;
             box-shadow: 0 4px 10px rgba(43, 147, 72, 0.3);
         }
 
-        .mic-btn-main.listening {
+        .mic-button.recording {
             animation: pulse 1.2s infinite;
             background: #e41e3f !important;
         }
@@ -223,7 +215,7 @@
             100% { transform: scale(1); }
         }
 
-        .audio-btn {
+        .listen-btn {
             background: var(--divider);
             border: none;
             padding: 8px 14px;
@@ -238,7 +230,8 @@
             font-size: 0.85rem;
         }
 
-        .input-control {
+        /* FORMULAIRES & BOUTONS */
+        .form-input {
             width: 100%;
             padding: 10px;
             border-radius: 6px;
@@ -248,7 +241,7 @@
             margin-top: 6px;
         }
 
-        .btn-action {
+        .btn-primary {
             width: 100%;
             padding: 12px;
             background: var(--primary);
@@ -261,7 +254,16 @@
             margin-top: 10px;
         }
 
-        .settings-item {
+        .btn-success {
+            background: #2b9348;
+        }
+
+        .btn-secondary {
+            background: var(--divider);
+            color: var(--text-main);
+        }
+
+        .menu-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -269,172 +271,173 @@
             border-bottom: 1px solid var(--divider);
             cursor: pointer;
         }
+
+        .friend-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .friend-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .friend-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
 
+    <!-- ENTÊTE DE L'APPLICATION -->
     <header>
-        <div style="display:flex; align-items:center; gap:10px;">
-            <span class="logo-text" onclick="showPage('feed')">IBS-SOCIAL</span>
-            <div class="search-bar" onclick="alert('Recherche d amis et de pages...')">
-                <i class="fas fa-search"></i>
-                <span>Rechercher</span>
-            </div>
-        </div>
-        <div class="header-right">
-            <button class="icon-btn" onclick="showPage('chat')"><i class="fas fa-comment"></i></button>
-            <button class="icon-btn" onclick="showPage('news')"><i class="fas fa-globe"></i></button>
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" class="user-top-avatar" onclick="showPage('profile')" id="header-avatar">
+        <span class="logo-text" onclick="switchPage('feed')">IBS-SOCIAL</span>
+        <div class="header-actions">
+            <button class="icon-btn" onclick="switchPage('friends')" title="Amis"><i class="fas fa-user-friends"></i></button>
+            <button class="icon-btn" onclick="switchPage('chat')" title="Messages"><i class="fas fa-comment"></i></button>
+            <button class="icon-btn" onclick="toggleDarkMode()" title="Mode Sombre"><i class="fas fa-moon"></i></button>
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" class="user-avatar-top" onclick="switchPage('profile')" id="top-avatar-img">
         </div>
     </header>
 
+    <!-- BARRE D'ONGLETS SUPERIEURE TYPE FACEBOOK -->
     <div class="top-tabs">
-        <div class="tab-item active" id="tab-feed" onclick="showPage('feed')"><i class="fas fa-home"></i></div>
-        <div class="tab-item" id="tab-market" onclick="showPage('market')"><i class="fas fa-microphone-alt"></i></div>
-        <div class="tab-item" id="tab-news" onclick="showPage('news')"><i class="fas fa-newspaper"></i></div>
-        <div class="tab-item" id="tab-profile" onclick="showPage('profile')"><i class="fas fa-user"></i></div>
-        <div class="tab-item" id="tab-menu" onclick="showPage('menu')"><i class="fas fa-bars"></i></div>
+        <div class="tab-item active" id="tab-btn-feed" onclick="switchPage('feed')" title="Accueil"><i class="fas fa-home"></i></div>
+        <div class="tab-item" id="tab-btn-market" onclick="switchPage('market')" title="Traduction Vocale"><i class="fas fa-microphone-alt"></i></div>
+        <div class="tab-item" id="tab-btn-friends" onclick="switchPage('friends')" title="Recherche d'Amis"><i class="fas fa-user-plus"></i></div>
+        <div class="tab-item" id="tab-btn-profile" onclick="switchPage('profile')" title="Mon Profil"><i class="fas fa-user"></i></div>
+        <div class="tab-item" id="tab-btn-menu" onclick="switchPage('menu')" title="Menu Réglages"><i class="fas fa-bars"></i></div>
     </div>
 
-    <!-- PAGE 1 : FIL D'ACTUALITE -->
-    <div id="page-feed" class="page active">
+    <!-- PAGE 1 : FIL D'ACTUALITÉ (HOME) -->
+    <div id="page-feed" class="page-content active">
         <div class="card" style="display:flex; gap:10px; align-items:center;">
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" style="width:40px; height:40px; border-radius:50%;" id="feed-avatar">
-            <input type="text" class="input-control" placeholder="Exprimez-vous avec traduction instantanée..." style="border-radius:20px;" onclick="alert('Nouvelle publication en cours...')">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" style="width:40px; height:40px; border-radius:50%;" id="feed-user-avatar">
+            <input type="text" class="form-input" placeholder="Exprimer une pensée avec traduction instantanée..." style="border-radius:20px; margin-top:0;" id="post-input">
+            <button class="btn-primary" style="width:auto; padding:8px 14px; margin-top:0;" onclick="publishPost()">Publier</button>
         </div>
 
-        <div class="card">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" style="width:40px; height:40px; border-radius:50%;">
-                <div>
-                    <strong id="feed-author-name">ISAAC BABYSON</strong> <span class="verified-badge-petrole"><i class="fas fa-check"></i></span>
-                    <div style="font-size:0.75rem; color:var(--text-sub);">Créateur Fondateur • Public</div>
+        <div id="posts-container">
+            <div class="card">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" style="width:40px; height:40px; border-radius:50%;">
+                    <div>
+                        <strong id="feed-author-name">ISAAC BABYSON</strong> <span class="verified-badge"><i class="fas fa-check"></i></span>
+                        <div style="font-size:0.75rem; color:var(--text-sub);">Créateur Fondateur • Public</div>
+                    </div>
+                </div>
+                <p id="feed-post-text">Bienvenue sur <strong>IBS-SOCIAL-TRADUCTION</strong> ! La plateforme créée pour unir le monde entier sans barrières de langues, au marché, à la maison ou au travail. 🌍✨</p>
+                <div style="margin-top:10px; padding:10px; background:var(--divider); border-radius:6px; font-size:0.85rem;">
+                    <i class="fas fa-language" style="color:var(--primary);"></i> <strong>Traduction automatique :</strong> "Welcome to IBS-SOCIAL-TRADUCTION! Connect with people worldwide without language barriers."
                 </div>
             </div>
-            <p id="feed-post-text">Bienvenue sur <strong>IBS-SOCIAL-TRADUCTION</strong> ! La plateforme universelle pour relier le monde entier sans barrière linguistique au marché, à la maison et au travail. 🌍✨</p>
         </div>
     </div>
 
-    <!-- PAGE 2 : TRADUCTION VOCALE DOUBLE MICRO (MONDE ENTIER) -->
-    <div id="page-market" class="page">
+    <!-- PAGE 2 : DUAL-MIC TRADUCTION VOCALE (FACE-À-FACE) -->
+    <div id="page-market" class="page-content">
         <div class="card">
-            <h2 style="text-align:center; color:var(--primary);"><i class="fas fa-store"></i> Traduction Face-à-Face</h2>
-            <p style="text-align:center; font-size:0.85rem; color:var(--text-sub); margin-bottom:15px;">Dialoguez instantanément dans n'importe quelle langue au marché, au bureau ou en voyage.</p>
+            <h2 style="text-align:center; color:var(--primary); margin-bottom:4px;"><i class="fas fa-store"></i> Traduction Directe Face-à-Face</h2>
+            <p style="text-align:center; font-size:0.85rem; color:var(--text-sub); margin-bottom:15px;">Microphone double pour dialoguer instantanément au marché, au travail ou dans la rue.</p>
 
-            <div class="speaker-card">
+            <!-- PERSONNE A (VOUS) -->
+            <div class="speaker-box">
                 <h3>Votre Langue</h3>
-                <select id="lang-a" class="input-control">
+                <select id="lang-a" class="form-input">
                     <option value="fr-FR">Français</option>
                     <option value="sw-KE">Swahili</option>
                     <option value="ln-CD">Lingala</option>
                     <option value="en-US">Anglais (US)</option>
                     <option value="es-ES">Espagnol</option>
-                    <option value="zh-CN">Chinois (Mandarin)</option>
+                    <option value="zh-CN">Chinois</option>
                     <option value="ar-SA">Arabe</option>
-                    <option value="de-DE">Allemand</option>
-                    <option value="pt-BR">Portugais</option>
                 </select>
-                <button id="btn-mic-a" class="mic-btn-main" onclick="toggleMic('A')">
+                <button id="btn-mic-a" class="mic-button" onclick="startMic('A')">
                     <i class="fas fa-microphone"></i>
                 </button>
-                <p id="text-a" style="font-style:italic;">Appuyez et parlez...</p>
+                <p id="text-a" style="font-style:italic; margin-top:5px;">Cliquez sur le micro et parlez...</p>
                 <p id="trans-a" style="color:var(--primary); font-weight:bold; margin-top:6px;"></p>
-                <button class="audio-btn" onclick="speakText('trans-a', 'lang-b')"><i class="fas fa-volume-up"></i> Écouter la traduction</button>
+                <button class="listen-btn" onclick="playAudio('trans-a', 'lang-b')"><i class="fas fa-volume-up"></i> Faire écouter la traduction</button>
             </div>
 
-            <div class="speaker-card person-b">
+            <!-- PERSONNE B (INTERLOCUTEUR) -->
+            <div class="speaker-box person-b">
                 <h3>Langue de l'Interlocuteur</h3>
-                <select id="lang-b" class="input-control">
+                <select id="lang-b" class="form-input">
                     <option value="en-US">Anglais (US)</option>
                     <option value="sw-KE">Swahili</option>
                     <option value="fr-FR">Français</option>
                     <option value="es-ES">Espagnol</option>
-                    <option value="zh-CN">Chinois (Mandarin)</option>
+                    <option value="zh-CN">Chinois</option>
                     <option value="ar-SA">Arabe</option>
-                    <option value="de-DE">Allemand</option>
-                    <option value="it-IT">Italien</option>
-                    <option value="ja-JP">Japonais</option>
                 </select>
-                <button id="btn-mic-b" class="mic-btn-main green" onclick="toggleMic('B')">
+                <button id="btn-mic-b" class="mic-button green" onclick="startMic('B')">
                     <i class="fas fa-microphone"></i>
                 </button>
-                <p id="text-b" style="font-style:italic;">L'autre personne appuie et parle...</p>
+                <p id="text-b" style="font-style:italic; margin-top:5px;">L'autre personne clique et parle...</p>
                 <p id="trans-b" style="color:#2b9348; font-weight:bold; margin-top:6px;"></p>
-                <button class="audio-btn" onclick="speakText('trans-b', 'lang-a')"><i class="fas fa-volume-up"></i> Écouter la traduction</button>
+                <button class="listen-btn" onclick="playAudio('trans-b', 'lang-a')"><i class="fas fa-volume-up"></i> Écouter la traduction</button>
             </div>
         </div>
     </div>
 
-    <!-- PAGE 3 : ACTUALITES GOOGLE & MONDE -->
-    <div id="page-news" class="page">
+    <!-- PAGE 3 : AMIS ET INVITATIONS -->
+    <div id="page-friends" class="page-content">
         <div class="card">
-            <h2><i class="fas fa-globe" style="color:var(--primary);"></i> Actualités Google en Direct</h2>
-            <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:15px;">Restez informé des dernières nouvelles mondiales traduites instantanément.</p>
-            
-            <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--divider);">
-                <span style="font-size:0.75rem; color:var(--primary); font-weight:bold;">Technologie & Innovation • Il y a 1h</span>
-                <h4 style="margin-top:2px;">L'intelligence artificielle révolutionne les échanges commerciaux dans les marchés du monde entier.</h4>
+            <h2><i class="fas fa-user-plus" style="color:var(--primary);"></i> Retrouver des Membres & Amis</h2>
+            <input type="text" class="form-input" placeholder="Rechercher par nom..." id="search-friends-input" onkeyup="filterFriends()">
+
+            <h3 style="margin-top:15px; font-size:1rem; color:var(--text-sub);">Invitations Reçues</h3>
+            <div id="requests-list">
+                <div class="friend-item">
+                    <div class="friend-info">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" class="friend-avatar">
+                        <div>
+                            <strong>Marie Claire (Paris)</strong>
+                            <div style="font-size:0.75rem; color:var(--text-sub);">Souhaite devenir votre amie</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <button class="btn-primary btn-success" style="padding:6px 10px; font-size:0.8rem; margin-top:0;" onclick="acceptFriend(this)">Accepter</button>
+                    </div>
+                </div>
             </div>
-            <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--divider);">
-                <span style="font-size:0.75rem; color:var(--primary); font-weight:bold;">Économie Internationale • Il y a 3h</span>
-                <h4 style="margin-top:2px;">Nouvelles opportunités de commerce transfrontalier sans barrière linguistique.</h4>
-            </div>
-            <div>
-                <span style="font-size:0.75rem; color:var(--primary); font-weight:bold;">Société • Il y a 5h</span>
-                <h4 style="margin-top:2px;">Comment les applications de traduction unissent les familles et les professionnels à travers les continents.</h4>
+
+            <h3 style="margin-top:15px; font-size:1rem; color:var(--text-sub);">Membres Suggérés</h3>
+            <div id="suggested-list">
+                <div class="friend-item">
+                    <div class="friend-info">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="friend-avatar">
+                        <div>
+                            <strong>John Smith (New York)</strong>
+                            <div style="font-size:0.75rem; color:var(--text-sub);">Parle Anglais</div>
+                        </div>
+                    </div>
+                    <button class="btn-primary" style="width:auto; padding:6px 12px; font-size:0.8rem; margin-top:0;" onclick="sendInvitation(this)">Ajouter</button>
+                </div>
+                <div class="friend-item">
+                    <div class="friend-info">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100" class="friend-avatar">
+                        <div>
+                            <strong>Kagame David (Kigali)</strong>
+                            <div style="font-size:0.75rem; color:var(--text-sub);">Parle Swahili</div>
+                        </div>
+                    </div>
+                    <button class="btn-primary" style="width:auto; padding:6px 12px; font-size:0.8rem; margin-top:0;" onclick="sendInvitation(this)">Ajouter</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- PAGE 4 : PROFIL & MODIFICATION CLIKABLE -->
-    <div id="page-profile" class="page">
+    <!-- PAGE 4 : PROFIL & CONFIGURATION -->
+    <div id="page-profile" class="page-content">
         <div class="card" style="padding:0; overflow:hidden;">
-            <div id="profile-cover-bg" style="height:130px; background:linear-gradient(45deg, #1877f2, #005f73); position:relative; background-size:cover; background-position:center;">
-                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120" class="avatar" id="profile-avatar-img" style="width:90px; height:90px; border-radius:50%; border:4px solid var(--bg-card); position:absolute; bottom:-30px; left:16px; object-fit:cover;">
-            </div>
-            <div style="padding:40px 16px 16px 16px;">
-                <h2 id="profile-name-display">ISAAC BABYSON <span class="verified-badge-petrole"><i class="fas fa-check"></i></span></h2>
-                <p id="profile-bio-display" style="color:var(--text-sub); font-size:0.9rem; margin-top:4px;">Créateur & Fondateur d'IBS-SOCIAL-TRADUCTION. Étudiant ISTM Goma.</p>
-                <p id="profile-email-display" style="font-size:0.8rem; color:var(--text-sub); margin-top:2px;"><i class="fas fa-envelope"></i> isaac@ibs-social.com</p>
-
-                <button class="btn-action" onclick="openEditProfile()" style="margin-top:15px;"><i class="fas fa-edit"></i> Modifier Mon Profil & Couverture</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- PAGE 5 : MENU & PARAMETRES DU COMPTE -->
-    <div id="page-menu" class="page">
-        <div class="card">
-            <h3>Paramètres & Gestion du Compte</h3>
-            <div style="margin-top:10px;">
-                <div class="settings-item" onclick="toggleDarkMode()">
-                    <span><i class="fas fa-moon" style="color:var(--primary); margin-right:10px;"></i> Mode Sombre</span>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                <div class="settings-item" onclick="openEditProfile()">
-                    <span><i class="fas fa-user-cog" style="color:var(--primary); margin-right:10px;"></i> Paramètres & Confidentialité du Compte</span>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                <div class="settings-item" onclick="showPage('auth')">
-                    <span><i class="fas fa-user-plus" style="color:#2b9348; margin-right:10px;"></i> Créer un Nouveau Compte / Se Connecter</span>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                <div class="settings-item" onclick="alert('Votre numéro (0840981930) est strictement sécurisé et privé dans votre coffre-fort personnel.')">
-                    <span><i class="fas fa-shield-alt" style="color:var(--badge-green); margin-right:10px;"></i> Sécurité du Numéro & Données</span>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PAGE 6 : CREATION / CONNEXION DE COMPTE -->
-    <div id="page-auth" class="page">
-        <div class="card">
-            <h2>Créer ou Gérer votre Compte</h2>
-            <p style="color:var(--text-sub); font-size:0.85rem; margin-bottom:15px;">Prenez le contrôle total de votre compte IBS.</p>
-            
-            <div style="margin-bottom:12px;">
-                <label style="font-size:0.85rem; font-weight:bold;">Nom Complet</label>
-                <input type="text" id="auth-name" class="input-control" placeholder="Votre nom">
-            </div>
-            <div
+            <div id="profile-cover" style="height:120px; background:linear-gradient(45deg, #1877f2, #005f73); position:relative;">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120" id="profile-main-avatar" style="width:85px; height:85px; border-radius:50%; border:
