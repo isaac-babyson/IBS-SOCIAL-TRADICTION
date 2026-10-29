@@ -1,4 +1,4 @@
-# IBS-SOCIAL-TRADICTION
+
 <input id="rPass" type="password" placeholder="Mot de passe">
 <div style="position:relative;margin:8px 0;">
   <input id="rPhone" placeholder="0840981930" style="width:100%;padding:12px;border-radius:8px;border:1px solid #dddfe2;">
