@@ -1,403 +1,705 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IBS-SOCIAL-TRADUCTION</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-main: #f0f2f5;
-            --bg-card: #ffffff;
-            --text-main: #050505;
-            --text-sub: #65676b;
-            --primary: #1877f2;
-            --badge-petrole: #005f73;
-            --border-color: #ced0d4;
-            --divider: #e4e6eb;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IBS-SOCIAL - Isaac Babyson</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #f0f2f5;
+      --bg-surface: #ffffff;
+      --text-main: #050505;
+      --text-sub: #65676b;
+      --primary-blue: #1877f2;
+      --border-color: #e4e6eb;
+      --hover-bg: #e4e6eb;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-        body.dark-mode {
-            --bg-main: #18191a;
-            --bg-card: #242526;
-            --text-main: #e4e6eb;
-            --text-sub: #b0b3b8;
-            --border-color: #3e4042;
-            --divider: #3e4042;
-        }
+    body.dark-theme {
+      --bg-primary: #18191a;
+      --bg-surface: #242526;
+      --text-main: #e4e6eb;
+      --text-sub: #b0b3b8;
+      --border-color: #393a3b;
+      --hover-bg: #3a3b3c;
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-main); padding-top: 108px; padding-bottom: 20px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        header {
-            position: fixed; top: 0; left: 0; right: 0; height: 56px;
-            background: var(--bg-card); border-bottom: 1px solid var(--border-color);
-            display: flex; align-items: center; justify-content: space-between; padding: 0 16px; z-index: 1000;
-        }
-        .fb-logo { font-size: 1.3rem; font-weight: 800; color: var(--primary); cursor: pointer; }
-        .header-right { display: flex; align-items: center; gap: 8px; }
-        .icon-btn {
-            width: 38px; height: 38px; border-radius: 50%; background: var(--divider);
-            display: flex; align-items: center; justify-content: center; cursor: pointer;
-            border: none; color: var(--text-main); font-size: 1rem;
-        }
-        .avatar-top { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; cursor: pointer; border: 2px solid var(--primary); }
+    .app-viewport {
+      width: 100%;
+      max-width: 480px;
+      background-color: var(--bg-primary);
+      min-height: 100vh;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      position: relative;
+      padding-bottom: 20px;
+    }
 
-        .fb-tabs {
-            position: fixed; top: 56px; left: 0; right: 0; height: 50px;
-            background: var(--bg-card); border-bottom: 1px solid var(--border-color);
-            display: flex; justify-content: space-around; align-items: center; z-index: 999;
-        }
-        .fb-tab {
-            flex: 1; height: 100%; display: flex; align-items: center; justify-content: center;
-            color: var(--text-sub); cursor: pointer; font-size: 1.3rem; background: none; border: none;
-            position: relative;
-        }
-        .fb-tab.active { color: var(--primary); }
-        .fb-tab.active::after {
-            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--primary);
-        }
+    /* BARRE D'EN-TÊTE */
+    .top-header {
+      background: var(--bg-surface);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .brand-logo {
+      color: var(--primary-blue);
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.5px;
+    }
+    .top-actions { display: flex; gap: 8px; }
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--hover-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-main);
+      border: none;
+      font-size: 16px;
+    }
 
-        .fb-page { display: none; max-width: 650px; margin: 0 auto; padding: 12px; }
-        .fb-page.active { display: block; }
+    /* BARRE DE NAVIGATION */
+    .nav-tabs {
+      background: var(--bg-surface);
+      display: flex;
+      justify-content: space-around;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 59px;
+      z-index: 99;
+    }
+    .tab-item {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      color: var(--text-sub);
+      cursor: pointer;
+      font-size: 18px;
+      position: relative;
+    }
+    .tab-item.active {
+      color: var(--primary-blue);
+    }
+    .tab-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background-color: var(--primary-blue);
+    }
 
-        .fb-card {
-            background: var(--bg-card); border-radius: 8px; padding: 14px; margin-bottom: 12px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1); border: 1px solid var(--border-color);
-        }
+    /* VUES DU CONTENU */
+    .view-content { display: none; }
+    .view-content.active { display: block; }
 
-        .badge-petrole {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 16px; height: 16px; background-color: var(--badge-petrole);
-            color: white; border-radius: 50%; font-size: 9px; margin-left: 4px;
-        }
+    /* FIL D'ACTUALITÉ */
+    .create-post-card {
+      background: var(--bg-surface);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .user-avatar-sm {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .post-input-box {
+      flex: 1;
+      background: var(--hover-bg);
+      border-radius: 20px;
+      padding: 10px 16px;
+      color: var(--text-sub);
+      font-size: 15px;
+      cursor: pointer;
+    }
 
-        /* TRADUCTION VOCALE CROISÉE */
-        .speak-box {
-            border: 2px solid var(--primary); border-radius: 12px; padding: 16px;
-            background: rgba(24, 119, 242, 0.03); margin-bottom: 16px; text-align: center;
-        }
-        .speak-box.partner { border-color: #2b9348; background: rgba(43, 147, 72, 0.03); }
+    .stories-container {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      overflow-x: auto;
+      background: var(--bg-surface);
+      margin-top: 8px;
+    }
+    .story-card {
+      min-width: 100px;
+      height: 160px;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+    }
+    .story-card.add-story {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .story-card.add-story img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+    }
+    .add-story-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary-blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--bg-surface);
+      margin-top: -16px;
+      z-index: 2;
+    }
+    .story-card.add-story span {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 4px;
+      text-align: center;
+    }
+    .story-title {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      right: 8px;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
 
-        .mic-btn-main {
-            width: 70px; height: 70px; border-radius: 50%; background: var(--primary);
-            color: white; border: none; font-size: 1.8rem; margin: 10px auto;
-            display: flex; align-items: center; justify-content: center; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(24, 119, 242, 0.3);
-        }
-        .mic-btn-main.green { background: #2b9348; box-shadow: 0 4px 10px rgba(43, 147, 72, 0.3); }
+    .post-feed-card {
+      background: var(--bg-surface);
+      margin-top: 8px;
+      padding-top: 12px;
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 16px 8px;
+    }
+    .post-author { font-weight: 700; font-size: 15px; }
+    .post-meta { font-size: 12px; color: var(--text-sub); }
+    .post-text { padding: 4px 16px 12px; font-size: 15px; line-height: 1.4; }
+    .translation-box {
+      background: rgba(24, 119, 242, 0.08);
+      border-left: 3px solid var(--primary-blue);
+      padding: 10px 14px;
+      margin: 0 16px 12px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+    }
+    .translation-title {
+      font-weight: 600;
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .post-media { width: 100%; max-height: 400px; object-fit: cover; }
 
-        .small-mic-listen {
-            background: #2b9348; color: white; border: none;
-            padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer;
-            margin-top: 10px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px;
-        }
-        .small-mic-listen.blue { background: var(--primary); }
+    /* MENU STYLE FACEBOOK */
+    .menu-view { padding: 12px 16px; }
+    .menu-title { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+    .profile-banner-card {
+      background: var(--bg-surface);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+    .profile-info { display: flex; align-items: center; gap: 12px; }
+    .profile-info img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+    .profile-name { font-weight: 700; font-size: 16px; }
+    .profile-sub { font-size: 13px; color: var(--text-sub); }
 
-        .fb-input {
-            width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);
-            background: var(--bg-card); color: var(--text-main); margin-top: 6px; font-size: 0.95rem;
-        }
-        .fb-btn {
-            width: 100%; padding: 12px; background: var(--primary); color: white; border: none;
-            border-radius: 6px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px;
-        }
+    .account-switcher-card {
+      background: var(--bg-surface);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 12px;
+    }
 
-        .setting-item {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 0; border-bottom: 1px solid var(--divider); cursor: pointer;
-        }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .menu-item-card {
+      background: var(--bg-surface);
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .menu-item-card i { font-size: 24px; }
+    .menu-item-card span { font-weight: 600; font-size: 14px; }
 
-        .cover-photo-box {
-            height: 140px; background: linear-gradient(45deg, #1877f2, #005f73);
-            position: relative; background-size: cover; background-position: center; cursor: pointer;
-        }
-        .profile-photo-box {
-            width: 90px; height: 90px; border-radius: 50%; border: 4px solid var(--bg-card);
-            position: absolute; bottom: -30px; left: 16px; object-fit: cover; cursor: pointer;
-        }
-    </style>
+    .menu-accordion {
+      background: var(--bg-surface);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* PROFIL */
+    .profile-container { background: var(--bg-surface); }
+    .cover-photo-wrapper {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: #ccc;
+    }
+    .cover-photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .change-photo-btn {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: var(--bg-surface);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+    }
+    .avatar-wrapper {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin: -65px auto 10px;
+    }
+    .avatar-wrapper img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 4px solid var(--bg-surface);
+      object-fit: cover;
+    }
+    .avatar-wrapper .change-photo-btn {
+      bottom: 4px;
+      right: 4px;
+    }
+    .profile-details { text-align: center; padding: 0 16px 16px; }
+    .profile-title-name { font-size: 22px; font-weight: 800; }
+    .profile-stats { font-size: 14px; color: var(--text-sub); margin-top: 4px; }
+    .profile-bio { font-size: 15px; margin: 12px 0; font-weight: 500; }
+    .profile-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; font-size: 13px; color: var(--text-sub); }
+
+    .profile-actions-bar {
+      display: flex;
+      gap: 10px;
+      padding: 0 16px 16px;
+    }
+    .btn-action {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-primary-action { background: var(--primary-blue); color: white; }
+    .btn-secondary-action { background: var(--hover-bg); color: var(--text-main); }
+
+    /* MARKETPLACE */
+    .marketplace-header { padding: 12px 16px; background: var(--bg-surface); }
+    .location-tag { color: var(--primary-blue); font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 4px; margin-top: 8px; }
+    .market-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 8px 16px;
+    }
+    .market-item {
+      background: var(--bg-surface);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .market-item img { width: 100%; height: 140px; object-fit: cover; }
+    .market-info { padding: 8px; }
+    .market-price { font-weight: 700; font-size: 15px; }
+    .market-title { font-size: 13px; color: var(--text-sub); }
+
+    /* MESSAGES TRADUITS */
+    .chat-box-container { padding: 16px; background: var(--bg-surface); min-height: 80vh; }
+    .chat-bubble {
+      background: var(--hover-bg);
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      max-width: 85%;
+    }
+    .chat-sender { font-weight: 700; margin-bottom: 4px; }
+    .translated-tag { color: var(--primary-blue); font-size: 12px; margin-top: 4px; display: block; }
+    .chat-input-bar { display: flex; gap: 8px; margin-top: 16px; }
+    .chat-input-bar input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      color: var(--text-main);
+    }
+
+    /* INPUTS FICHIERS CACHÉS */
+    input[type="file"] { display: none; }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="fb-logo" onclick="showFbPage('feed')">IBS-SOCIAL</div>
-        <div class="header-right">
-            <button class="icon-btn" onclick="alert('Recherche de nouveaux amis...')"><i class="fas fa-search"></i></button>
-            <button class="icon-btn" onclick="showFbPage('chat')"><i class="fas fa-comment-dots"></i></button>
-            <button class="icon-btn" onclick="showFbPage('menu')"><i class="fas fa-bars"></i></button>
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" class="avatar-top" onclick="showFbPage('profile')" id="header-avatar">
-        </div>
+  <div class="app-viewport">
+
+    <!-- BARRE D'EN-TÊTE PRINCIPALE -->
+    <header class="top-header">
+      <div class="brand-logo">IBS-SOCIAL</div>
+      <div class="top-actions">
+        <button class="icon-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+        <button class="icon-btn" onclick="switchTab('messagesView')"><i class="fa-solid fa-comment"></i></button>
+        <button class="icon-btn" onclick="switchTab('menuView')"><i class="fa-solid fa-bars"></i></button>
+      </div>
     </header>
 
-    <div class="fb-tabs">
-        <button class="fb-tab active" id="tab-feed" onclick="showFbPage('feed')"><i class="fas fa-home"></i></button>
-        <button class="fb-tab" id="tab-market" onclick="showFbPage('market')"><i class="fas fa-microphone-alt"></i></button>
-        <button class="fb-tab" id="tab-friends" onclick="showFbPage('friends')"><i class="fas fa-user-friends"></i></button>
-        <button class="fb-tab" id="tab-watch" onclick="showFbPage('watch')"><i class="fas fa-tv"></i></button>
-        <button class="fb-tab" id="tab-profile" onclick="showFbPage('profile')"><i class="fas fa-user-circle"></i></button>
-    </div>
+    <!-- BARRE DES ONGLETS DE NAVIGATION -->
+    <nav class="nav-tabs">
+      <div class="tab-item active" onclick="switchTab('feedView', this)"><i class="fa-solid fa-house"></i></div>
+      <div class="tab-item" onclick="switchTab('friendsView', this)"><i class="fa-solid fa-user-group"></i></div>
+      <div class="tab-item" onclick="switchTab('messagesView', this)"><i class="fa-solid fa-comments"></i></div>
+      <div class="tab-item" onclick="switchTab('marketView', this)"><i class="fa-solid fa-store"></i></div>
+      <div class="tab-item" onclick="switchTab('profileView', this)"><i class="fa-solid fa-circle-user"></i></div>
+      <div class="tab-item" onclick="switchTab('menuView', this)"><i class="fa-solid fa-bars"></i></div>
+    </nav>
 
-    <!-- ACCUEIL -->
-    <div id="page-feed" class="fb-page active">
-        <div class="fb-card" style="display:flex; gap:10px; align-items:center;">
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" style="width:40px; height:40px; border-radius:50%; object-fit:cover;" id="post-user-avatar">
-            <input type="text" class="fb-input" placeholder="Quoi de neuf ?" style="border-radius:20px; margin-top:0;" id="feed-input-text">
-            <button class="fb-btn" style="width:auto; padding:8px 14px; margin-top:0;" onclick="publishFeedPost()">Publier</button>
+    <!-- VUE 1 : FIL D'ACTUALITÉ (FEED) -->
+    <section id="feedView" class="view-content active">
+      <div class="create-post-card">
+        <img id="feedAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" class="user-avatar-sm" onclick="switchTab('profileView')" alt="Avatar">
+        <div class="post-input-box" onclick="alert('Créer une publication...')">À quoi pensez-vous ?</div>
+        <i class="fa-solid fa-image" style="color: #45bd62; font-size: 20px;"></i>
+      </div>
+
+      <div class="stories-container">
+        <div class="story-card add-story" onclick="document.getElementById('profilePicInput').click()">
+          <img id="storyProfilePreview" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" alt="Profile">
+          <div class="add-story-btn"><i class="fa-solid fa-plus"></i></div>
+          <span>Créer une story</span>
+        </div>
+        <div class="story-card" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop');">
+          <span class="story-title">Iman Brk</span>
+        </div>
+        <div class="story-card" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop');">
+          <span class="story-title">Seleste H.</span>
+        </div>
+      </div>
+
+      <article class="post-feed-card">
+        <div class="post-header">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" class="user-avatar-sm" alt="Founder">
+          <div>
+            <div class="post-author">ISAAC BABYSON <i class="fa-solid fa-circle-check" style="color:#1877f2;"></i></div>
+            <div class="post-meta">Créateur Fondateur · Public</div>
+          </div>
+        </div>
+        <div class="post-text">
+          Bienvenue sur **IBS-SOCIAL-TRADUCTION** ! La plateforme créée pour réunir le monde entier sans aucune barrière linguistique, au marché, à la maison et au travail. 🌍✨
+        </div>
+        <div class="translation-box">
+          <div class="translation-title"><i class="fa-solid fa-language"></i> Traduction automatique :</div>
+          <div>"Welcome to IBS-SOCIAL-TRADUCTION! Connecting people worldwide without language barriers."</div>
+        </div>
+      </article>
+    </section>
+
+    <!-- VUE 2 : PROFIL MODIFIABLE -->
+    <section id="profileView" class="view-content">
+      <div class="profile-container">
+        <!-- COUVERTURE -->
+        <div class="cover-photo-wrapper">
+          <img id="coverImg" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop" alt="Couverture">
+          <div class="change-photo-btn" onclick="document.getElementById('coverPicInput').click()">
+            <i class="fa-solid fa-camera"></i>
+          </div>
         </div>
 
-        <div id="posts-wall">
-            <div class="fb-card">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
-                    <div>
-                        <strong id="creator-display-name">ISAAC BABYSON</strong> <span class="badge-petrole"><i class="fas fa-check"></i></span>
-                        <div style="font-size:0.75rem; color:var(--text-sub);">Créateur Fondateur • Public</div>
-                    </div>
-                </div>
-                <p>Bienvenue sur <strong>IBS-SOCIAL-TRADUCTION</strong> ! La plateforme qui unit toutes les personnes de toutes les langues au marché, à la maison et au travail. 🌍✨</p>
+        <!-- AVATAR -->
+        <div class="avatar-wrapper">
+          <img id="profileImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop" alt="Photo de Profil">
+          <div class="change-photo-btn" onclick="document.getElementById('profilePicInput').click()">
+            <i class="fa-solid fa-camera"></i>
+          </div>
+        </div>
+
+        <!-- INFOS PROFIL -->
+        <div class="profile-details">
+          <h1 class="profile-title-name">Isaac Babyson Guy</h1>
+          <div class="profile-stats">5 K followers · 134 suivi(e)s</div>
+          <p class="profile-bio">best singer from DRC 🇨🇩<br>RNB style</p>
+          <div class="profile-tags">
+            <span>✨ Creator avec IA</span> · 
+            <span>💻 Création digitale</span> · 
+            <span>🎵 Gospel music</span> · 
+            <span>🎓 UNIGOM</span>
+          </div>
+        </div>
+
+        <!-- BOUTONS D'ACTION -->
+        <div class="profile-actions-bar">
+          <button class="btn-action btn-primary-action" onclick="switchTab('menuView')">
+            <i class="fa-solid fa-chart-line"></i> Tableau de bord
+          </button>
+          <button class="btn-action btn-secondary-action">
+            <i class="fa-solid fa-plus"></i> Ajouter à la story
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VUE 3 : MENU STYLE FACEBOOK -->
+    <section id="menuView" class="view-content">
+      <div class="menu-view">
+        <h1 class="menu-title">Menu</h1>
+
+        <div class="profile-banner-card" onclick="switchTab('profileView')">
+          <div class="profile-info">
+            <img id="menuAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" alt="Avatar Menu">
+            <div>
+              <div class="profile-name">Isaac Babyson Guy</div>
+              <div class="profile-sub">Voir votre profil</div>
             </div>
+          </div>
+          <i class="fa-solid fa-chevron-down"></i>
         </div>
-    </div>
 
-    <!-- MODULE DE TRADUCTION CROISÉE PARFAIT -->
-    <div id="page-market" class="fb-page">
-        <div class="fb-card">
-            <h2 style="text-align:center; color:var(--primary); margin-bottom:4px;"><i class="fas fa-store"></i> Traduction Face-à-Face en Direct</h2>
-            <p style="text-align:center; font-size:0.85rem; color:var(--text-sub); margin-bottom:15px;">Échangez facilement au marché ou au travail, peu importe votre langue native !</p>
-
-            <!-- PERSONNE 1 -->
-            <div class="speak-box">
-                <h3>Personne 1 (Grand Micro)</h3>
-                <select id="lang-1" class="fb-input">
-                    <option value="fr-FR">Français</option>
-                    <option value="sw-KE">Swahili</option>
-                    <option value="rw-RW">Kinyarwanda</option>
-                    <option value="lg-UG">Luganda (Ouganda)</option>
-                    <option value="ln-CD">Lingala</option>
-                    <option value="lu-CD">Kiluba</option>
-                    <option value="kg-CD">Kikongo</option>
-                    <option value="en-US">Anglais</option>
-                    <option value="zh-CN">Chinois</option>
-                    <option value="es-ES">Espagnol</option>
-                </select>
-                
-                <!-- Grand Micro 1 -->
-                <button class="mic-btn-main" onclick="startSpeakerRecord('1')"><i class="fas fa-microphone"></i></button>
-                <p id="speech-original-1" style="font-style:italic; margin-top:4px;">Parlez ici...</p>
-                
-                <!-- Petit Micro de la Personne 2 pour écouter -->
-                <div style="margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-color);">
-                    <span style="font-size:0.8rem; color:var(--text-sub); display:block; margin-bottom:4px;">Interprétation pour la Personne 2 :</span>
-                    <p id="translated-result-for-2" style="color:#2b9348; font-weight:bold; margin-bottom:6px;"></p>
-                    <button class="small-mic-listen" onclick="listenTranslation('translated-result-for-2', 'lang-2')">
-                        <i class="fas fa-volume-up"></i> Petit Micro Personne 2 (Écouter l'interprétation)
-                    </button>
-                </div>
-            </div>
-
-            <!-- PERSONNE 2 -->
-            <div class="speak-box partner">
-                <h3>Personne 2 (Grand Micro)</h3>
-                <select id="lang-2" class="fb-input">
-                    <option value="rw-RW">Kinyarwanda</option>
-                    <option value="sw-KE">Swahili</option>
-                    <option value="lg-UG">Luganda (Ouganda)</option>
-                    <option value="fr-FR">Français</option>
-                    <option value="ln-CD">Lingala</option>
-                    <option value="lu-CD">Kiluba</option>
-                    <option value="kg-CD">Kikongo</option>
-                    <option value="en-US">Anglais</option>
-                    <option value="zh-CN">Chinois</option>
-                    <option value="es-ES">Espagnol</option>
-                </select>
-
-                <!-- Grand Micro 2 -->
-                <button class="mic-btn-main green" onclick="startSpeakerRecord('2')"><i class="fas fa-microphone"></i></button>
-                <p id="speech-original-2" style="font-style:italic; margin-top:4px;">L'autre personne répond ici...</p>
-
-                <!-- Petit Micro de la Personne 1 pour écouter -->
-                <div style="margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-color);">
-                    <span style="font-size:0.8rem; color:var(--text-sub); display:block; margin-bottom:4px;">Interprétation pour la Personne 1 :</span>
-                    <p id="translated-result-for-1" style="color:var(--primary); font-weight:bold; margin-bottom:6px;"></p>
-                    <button class="small-mic-listen blue" onclick="listenTranslation('translated-result-for-1', 'lang-1')">
-                        <i class="fas fa-volume-up"></i> Petit Micro Personne 1 (Écouter l'interprétation)
-                    </button>
-                </div>
-            </div>
+        <div class="account-switcher-card">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <i class="fa-solid fa-users-gear" style="font-size:20px;"></i>
+            <span style="font-weight:600;">Changer de compte</span>
+          </div>
+          <i class="fa-solid fa-chevron-down"></i>
         </div>
-    </div>
 
-    <!-- DEMANDES D'AMIS -->
-    <div id="page-friends" class="fb-page">
-        <div class="fb-card">
-            <h2><i class="fas fa-user-plus" style="color:var(--primary);"></i> Invitations d'Amis</h2>
-            <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--divider);">
-                <div><strong>David Smith (USA)</strong></div>
-                <button class="fb-btn" style="width:auto; padding:6px 12px; margin-top:0;" onclick="this.innerText='Ami Ajouté !'">Accepter</button>
-            </div>
+        <div class="account-switcher-card">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <i class="fa-solid fa-heart" style="color:#e41e3f; font-size:20px;"></i>
+            <span style="font-weight:600;">Inviter des ami(e)s</span>
+          </div>
         </div>
-    </div>
 
-    <!-- WATCH -->
-    <div id="page-watch" class="fb-page">
-        <div class="fb-card">
-            <h2><i class="fas fa-tv" style="color:var(--primary);"></i> Vidéos & Reels</h2>
+        <!-- GRILLE COMPLÈTE À 2 COLONNES -->
+        <div class="menu-grid">
+          <div class="menu-item-card">
+            <i class="fa-solid fa-chart-column" style="color: #1877f2;"></i>
+            <span>Tableau de bord</span>
+          </div>
+          <div class="menu-item-card" onclick="switchTab('messagesView')">
+            <i class="fa-solid fa-message" style="color: #0084ff;"></i>
+            <span>Messages</span>
+          </div>
+          <div class="menu-item-card">
+            <i class="fa-solid fa-user-group" style="color: #1877f2;"></i>
+            <span>Groupes</span>
+          </div>
+          <div class="menu-item-card">
+            <i class="fa-solid fa-user-check" style="color: #2b72ee;"></i>
+            <span>Ami(e)s</span>
+          </div>
+          <div class="menu-item-card">
+            <i class="fa-solid fa-clapperboard" style="color: #f3425f;"></i>
+            <span>Reels</span>
+          </div>
+          <div class="menu-item-card" onclick="switchTab('marketView')">
+            <i class="fa-solid fa-store" style="color: #00a400;"></i>
+            <span>Marketplace</span>
+          </div>
+          <div class="menu-item-card">
+            <i class="fa-solid fa-flag" style="color: #f7b928;"></i>
+            <span>Pages</span>
+          </div>
+          <div class="menu-item-card">
+            <i class="fa-solid fa-bookmark" style="color: #b062d0;"></i>
+            <span>Enregistrements</span>
+          </div>
+          <div class="menu-item-card">
+            <i class="fa-solid fa-gift" style="color: #f3425f;"></i>
+            <span>Anniversaires</span>
+          </div>
+          <div class="menu-item-card">
+            <i class="fa-solid fa-calendar-days" style="color: #f3425f;"></i>
+            <span>Évènements</span>
+          </div>
         </div>
-    </div>
 
-    <!-- PROFIL -->
-    <div id="page-profile" class="fb-page">
-        <div class="fb-card" style="padding:0; overflow:hidden;">
-            <div class="cover-photo-box" id="cover-photo" onclick="changeCoverPhoto()">
-                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120" class="profile-photo-box" id="profile-photo" onclick="event.stopPropagation(); changeProfilePhoto();">
-            </div>
-            <div style="padding:35px 16px 16px 16px;">
-                <h2 id="profile-name">ISAAC BABYSON <span class="badge-petrole"><i class="fas fa-check"></i></span></h2>
-                <p id="profile-bio" style="color:var(--text-sub); font-size:0.9rem;">Créateur Officiel d'IBS-SOCIAL-TRADUCTION. Étudiant ISTM Goma.</p>
-                <button class="fb-btn" onclick="openProfileEditForm()"><i class="fas fa-edit"></i> Modifier Profil</button>
-            </div>
+        <div class="menu-accordion">
+          <span><i class="fa-solid fa-circle-question"></i> Aide et assistance</span>
+          <i class="fa-solid fa-chevron-down"></i>
         </div>
-        <div class="fb-card" id="edit-profile-box" style="display:none;">
-            <input type="text" id="edit-name-input" class="fb-input" value="ISAAC BABYSON">
-            <input type="text" id="edit-bio-input" class="fb-input" value="Fondateur & Créateur d'IBS-SOCIAL-TRADUCTION">
-            <button class="fb-btn" onclick="saveProfileData()">Enregistrer</button>
+        <div class="menu-accordion" onclick="toggleTheme()">
+          <span><i class="fa-solid fa-moon"></i> Mode Sombre</span>
+          <i class="fa-solid fa-toggle-on" style="color:var(--primary-blue);"></i>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <!-- MESSAGERIE -->
-    <div id="page-chat" class="fb-page">
-        <div class="fb-card">
-            <h2>Discussions Traduites</h2>
-            <div id="chat-box" style="height:150px; border:1px solid var(--border-color); padding:10px; margin-top:10px;">
-                <strong>Jean :</strong> Bonjour Isaac !
-            </div>
+    <!-- VUE 4 : MARKETPLACE (GOMA / CDF) -->
+    <section id="marketView" class="view-content">
+      <div class="marketplace-header">
+        <h2>Marketplace</h2>
+        <div class="location-tag"><i class="fa-solid fa-location-dot"></i> Goma · 65 km</div>
+      </div>
+      <div class="market-grid">
+        <div class="market-item">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&auto=format&fit=crop" alt="Item">
+          <div class="market-info">
+            <div class="market-price">30 000 CDF</div>
+            <div class="market-title">Chaussures de sport</div>
+          </div>
         </div>
-    </div>
-
-    <!-- MENU 3 TIRETS -->
-    <div id="page-menu" class="fb-page">
-        <div class="fb-card">
-            <h2>Paramètres & Configuration</h2>
-            <div class="setting-item" onclick="toggleDarkMode()"><span>Mode Sombre</span><i class="fas fa-chevron-right"></i></div>
-            <div class="setting-item" onclick="toggleSub('auth')"><span>Créer un Compte Autonome</span><i class="fas fa-chevron-right"></i></div>
-            <div class="setting-item" onclick="toggleSub('bio')"><span>Biographie du Fondateur</span><i class="fas fa-chevron-right"></i></div>
+        <div class="market-item">
+          <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&auto=format&fit=crop" alt="Item">
+          <div class="market-info">
+            <div class="market-price">736 000 CDF</div>
+            <div class="market-title">iPhone 12 Pro</div>
+          </div>
         </div>
-        <div class="fb-card" id="sub-auth" style="display:none;">
-            <input type="text" id="new-user-name" class="fb-input" placeholder="Votre nom">
-            <button class="fb-btn" onclick="registerUserAccount()">Créer mon compte</button>
+      </div>
+    </section>
+
+    <!-- VUE 5 : MESSAGES TRADUITS EN DIRECT -->
+    <section id="messagesView" class="view-content">
+      <div class="chat-box-container">
+        <h3><i class="fa-solid fa-language"></i> Discussions Traduites</h3>
+        <br>
+        <div class="chat-bubble">
+          <div class="chat-sender">Jean (Paris)</div>
+          <div>Bonjour Isaac ! Comment se passe le lancement de l'application à Goma ?</div>
+          <span class="translated-tag">✓ Traduit automatiquement</span>
         </div>
-        <div class="fb-card" id="sub-bio" style="display:none;">
-            <p>Né à NYAMILIMA, grandi à KISEGURO (E.P. Saint Benoît, Institut Saint Augustin). Étudiant ISTM GOMA (Laboratoire). Fils aîné de la famille pastorale (Papa KAYENGA KINGAMILUBO, Maman MANIRIHO MAHORO, frères AHADI et DANIEL).</p>
+        <div class="chat-bubble" style="margin-left: auto; background: var(--primary-blue); color: white;">
+          <div class="chat-sender" style="color: white;">Vous</div>
+          <div>Merci Jean ! Le projet IBS-SOCIAL avance très bien ici.</div>
         </div>
-    </div>
 
-    <script>
-        function showFbPage(id) {
-            document.querySelectorAll('.fb-page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.fb-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('page-' + id).classList.add('active');
-            const tab = document.getElementById('tab-' + id);
-            if(tab) tab.classList.add('active');
-            window.scrollTo(0,0);
+        <div class="chat-input-bar">
+          <input type="text" placeholder="Écrire un message...">
+          <button class="icon-btn" style="background: var(--primary-blue); color: white;"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VUE 6 : AMIS (RAPPEL) -->
+    <section id="friendsView" class="view-content">
+      <div style="padding: 16px;">
+        <h3>Demandes d'amis</h3>
+        <p style="color: var(--text-sub); margin-top: 8px;">Aucune nouvelle demande pour le moment.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- SÉLECTEURS DE FICHIERS CACHÉS (POUR CHANGEMENT PHOTO AU CLIC DIRECT) -->
+  <input type="file" id="profilePicInput" accept="image/*" onchange="previewImage(this, ['profileImg', 'feedAvatar', 'menuAvatar', 'storyProfilePreview'])">
+  <input type="file" id="coverPicInput" accept="image/*" onchange="previewImage(this, ['coverImg'])">
+
+  <script>
+    // NAVIGATION ENTRE LES ONGLETS
+    function switchTab(viewId, tabElement) {
+      document.querySelectorAll('.view-content').forEach(view => {
+        view.classList.remove('active');
+      });
+      document.getElementById(viewId).classList.add('active');
+
+      if(tabElement) {
+        document.querySelectorAll('.tab-item').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        tabElement.classList.add('active');
+      }
+      window.scrollTo(0,0);
+    }
+
+    // MODIFICATION DE PHOTO IMMÉDIATE SANS EXIGENCES STRICTES DE FICHIER
+    function previewImage(input, targetIds) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          targetIds.forEach(id => {
+            const imgEl = document.getElementById(id);
+            if(imgEl) imgEl.src = e.target.result;
+          });
         }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
 
-        function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
-        function toggleSub(id) {
-            const el = document.getElementById('sub-' + id);
-            el.style.display = el.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function changeProfilePhoto() {
-            const url = prompt("Lien de la nouvelle photo de profil :");
-            if(url) document.getElementById('profile-photo').src = url;
-        }
-
-        function changeCoverPhoto() {
-            const url = prompt("Lien de la nouvelle couverture :");
-            if(url) document.getElementById('cover-photo').style.backgroundImage = "url('" + url + "')";
-        }
-
-        function openProfileEditForm() {
-            const box = document.getElementById('edit-profile-box');
-            box.style.display = box.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function saveProfileData() {
-            const name = document.getElementById('edit-name-input').value;
-            const bio = document.getElementById('edit-bio-input').value;
-            if(name) document.getElementById('profile-name').innerHTML = name + ' <span class="badge-petrole"><i class="fas fa-check"></i></span>';
-            if(bio) document.getElementById('profile-bio').innerText = bio;
-            openProfileEditForm();
-        }
-
-        function registerUserAccount() {
-            const name = document.getElementById('new-user-name').value;
-            if(name) {
-                document.getElementById('profile-name').innerHTML = name + ' <span class="badge-petrole"><i class="fas fa-check"></i></span>';
-                alert('Compte créé !');
-                showFbPage('profile');
-            }
-        }
-
-        function publishFeedPost() {
-            const txt = document.getElementById('feed-input-text').value;
-            if(!txt) return;
-            const wall = document.getElementById('posts-wall');
-            const div = document.createElement('div');
-            div.className = 'fb-card';
-            div.innerHTML = `<p>${txt}</p>`;
-            wall.prepend(div);
-            document.getElementById('feed-input-text').value = '';
-        }
-
-        // --- TRADUCTION VOCALE CROISÉE PARFAITE ---
-
-        function startSpeakerRecord(speakerNumber) {
-            const sourceLang = document.getElementById(speakerNumber === '1' ? 'lang-1' : 'lang-2').value;
-            const targetLang = document.getElementById(speakerNumber === '1' ? 'lang-2' : 'lang-1').value;
-            
-            const origElem = document.getElementById(speakerNumber === '1' ? 'speech-original-1' : 'speech-original-2');
-            const transElem = document.getElementById(speakerNumber === '1' ? 'translated-result-for-2' : 'translated-result-for-1');
-
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-            if(!SpeechRecognition) {
-                const speechInput = prompt("Dictée directe : Parlez dans votre langue :");
-                if(speechInput) {
-                    origElem.innerText = '"' + speechInput + '"';
-                    transElem.innerText = speechInput + " (Traduit en " + targetLang + ")";
-                }
-                return;
-            }
-
-            const rec = new SpeechRecognition();
-            rec.lang = sourceLang;
-            origElem.innerText = "Écoute en cours... Parlez maintenant !";
-
-            rec.onresult = function(e) {
-                const text = e.results[0][0].transcript;
-                origElem.innerText = '"' + text + '"';
-                transElem.innerText = text + " (Interprété en " + targetLang + ")";
-            };
-
-            rec.onerror = function() { origElem.innerText = "Capture terminée."; };
-            rec.start();
-        }
-
-        function listenTranslation(textElementId, targetLangSelectId) {
-            const textToSpeak = document.getElementById(textElementId).innerText;
-            const targetLang = document.getElementById(targetLangSelectId).value;
-
-            if(!textToSpeak) {
-                alert("Rien à écouter. Veuillez d'abord parler dans le Grand Micro !");
-                return;
-            }
-
-            const utterance = new SpeechSynthesisUtterance(textToSpeak);
-            utterance.lang = targetLang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
+    // GESTION DU MODE SOMBRE
+    function toggleTheme() {
+      document.body.classList.toggle('dark-theme');
+    }
+  </script>
 </body>
-                </html>
+    </html>
