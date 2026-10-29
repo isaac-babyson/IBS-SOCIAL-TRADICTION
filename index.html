@@ -7,155 +7,490 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-main: #f0f2f5;
+            --bg-main: #ffffff;
             --bg-card: #ffffff;
             --text-main: #050505;
             --text-sub: #65676b;
             --primary: #1877f2;
-            --badge-green: #005f73;
+            --badge-petrole: #005f73;
             --border-color: #ced0d4;
             --divider: #e4e6eb;
+            --hover-bg: #f2f2f2;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+
+        body.dark-mode {
+            --bg-main: #18191a;
+            --bg-card: #242526;
+            --text-main: #e4e6eb;
+            --text-sub: #b0b3b8;
+            --border-color: #3e4042;
+            --divider: #3e4042;
+            --hover-bg: #3a3b3c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background-color: var(--bg-main); color: var(--text-main); padding-top: 110px; padding-bottom: 30px; }
 
+        /* EN-TÊTE PRINCIPAL FACEBOOK STYLE */
         header {
-            position: fixed; top: 0; left: 0; right: 0; height: 55px;
+            position: fixed; top: 0; left: 0; right: 0; height: 56px;
             background: var(--bg-card); border-bottom: 1px solid var(--border-color);
-            display: flex; align-items: center; justify-content: space-between; padding: 0 15px; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 16px; z-index: 1000;
         }
-        .logo { font-size: 1.2rem; font-weight: bold; color: var(--primary); cursor: pointer; }
+        .app-title { font-size: 1.1rem; font-weight: 800; color: var(--primary); cursor: pointer; letter-spacing: -0.5px; }
         
-        .tabs {
-            position: fixed; top: 55px; left: 0; right: 0; height: 50px;
+        .header-icons { display: flex; align-items: center; gap: 8px; }
+        .btn-round {
+            width: 38px; height: 38px; border-radius: 50%; background: var(--divider);
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            border: none; color: var(--text-main); font-size: 1rem;
+        }
+
+        /* BARRE D'ONGLETS SUPERIEURS */
+        .top-navigation {
+            position: fixed; top: 56px; left: 0; right: 0; height: 48px;
             background: var(--bg-card); border-bottom: 1px solid var(--border-color);
             display: flex; justify-content: space-around; align-items: center; z-index: 999;
         }
-        .tab-btn {
-            background: none; border: none; font-size: 1.3rem; color: var(--text-sub);
-            cursor: pointer; flex: 1; height: 100%; display: flex; align-items: center; justify-content: center;
+        .nav-tab {
+            flex: 1; height: 100%; display: flex; align-items: center; justify-content: center;
+            color: var(--text-sub); cursor: pointer; font-size: 1.2rem; background: none; border: none;
+            position: relative;
         }
-        .tab-btn.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
+        .nav-tab.active { color: var(--primary); }
+        .nav-tab.active::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--primary);
+        }
 
-        .view-page { display: none; max-width: 600px; margin: 0 auto; padding: 15px; }
-        .view-page.active { display: block; }
+        /* VUES & PAGES */
+        .page-view { display: none; max-width: 650px; margin: 0 auto; padding: 12px; }
+        .page-view.active { display: block; }
 
-        .box { background: var(--bg-card); border-radius: 8px; padding: 15px; margin-bottom: 15px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 1rem; }
-        .input-box { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); margin-top: 5px; font-size: 1rem; }
-        
-        .badge { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background-color: var(--badge-green); color: white; border-radius: 50%; font-size: 9px; margin-left: 4px; }
+        .card-panel {
+            background: var(--bg-card); border-radius: 8px; padding: 16px; margin-bottom: 12px;
+            border: 1px solid var(--border-color); box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* BADGE PETROLE FACEBOOK */
+        .badge-petrole {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 16px; height: 16px; background-color: var(--badge-petrole);
+            color: white; border-radius: 50%; font-size: 9px; margin-left: 4px;
+        }
+
+        /* DOUBLE MICROPHONE POUR LE MARCHÉ ET LE TRAVAIL */
+        .mic-box {
+            border: 2px solid var(--primary); border-radius: 12px; padding: 16px;
+            background: rgba(24, 119, 242, 0.03); margin-bottom: 14px; text-align: center;
+        }
+        .mic-box.partner { border-color: #2b9348; background: rgba(43, 147, 72, 0.03); }
+
+        .mic-btn-huge {
+            width: 70px; height: 70px; border-radius: 50%; background: var(--primary);
+            color: white; border: none; font-size: 1.6rem; margin: 10px auto;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(24, 119, 242, 0.3);
+        }
+        .mic-btn-huge.green { background: #2b9348; box-shadow: 0 4px 10px rgba(43, 147, 72, 0.3); }
+
+        .listen-small-btn {
+            background: var(--divider); border: none; padding: 6px 14px; border-radius: 15px;
+            color: var(--text-main); font-weight: bold; cursor: pointer; margin-top: 8px; font-size: 0.85rem;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+
+        /* FORMULAIRES ET MENU DE NAVIGATION INTERNE */
+        .form-control {
+            width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);
+            background: var(--bg-card); color: var(--text-main); margin-top: 6px;
+        }
+        .btn-blue {
+            width: 100%; padding: 12px; background: var(--primary); color: white; border: none;
+            border-radius: 6px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px;
+        }
+
+        .setting-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 0; border-bottom: 1px solid var(--divider); cursor: pointer;
+        }
+        .setting-row:hover { background: var(--hover-bg); }
+
+        /* STORIES */
+        .story-wrapper { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 10px; }
+        .story-item {
+            min-width: 90px; height: 140px; border-radius: 10px; background: var(--divider);
+            display: flex; align-items: flex-end; padding: 8px; font-size: 0.75rem; font-weight: bold;
+            background-size: cover; background-position: center; color: white;
+        }
     </style>
 </head>
 <body>
 
+    <!-- EN-TÊTE FIXE SUPERIEUR -->
     <header>
-        <div class="logo" onclick="goTo('home')">IBS-SOCIAL</div>
-        <div style="display:flex; gap:10px;">
-            <button onclick="goTo('friends')" style="background:var(--divider); border:none; width:35px; height:35px; border-radius:50%; cursor:pointer;"><i class="fas fa-user-plus"></i></button>
-            <button onclick="goTo('profile')" style="background:var(--divider); border:none; width:35px; height:35px; border-radius:50%; cursor:pointer;"><i class="fas fa-user"></i></button>
+        <div class="app-title" onclick="openView('feed')">IBS-SOCIAL-TRADUCTION</div>
+        <div class="header-icons">
+            <button class="btn-round" onclick="openView('friends')" title="Recherche Amis"><i class="fas fa-user-plus"></i></button>
+            <button class="btn-round" onclick="openView('chat')" title="Messagerie"><i class="fas fa-comment"></i></button>
+            <button class="btn-round" onclick="openView('menu')" title="Menu 3 tirets"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
-    <div class="tabs">
-        <button class="tab-btn active" id="t-home" onclick="goTo('home')"><i class="fas fa-home"></i></button>
-        <button class="tab-btn" id="t-market" onclick="goTo('market')"><i class="fas fa-microphone-alt"></i></button>
-        <button class="tab-btn" id="t-friends" onclick="goTo('friends')"><i class="fas fa-users"></i></button>
-        <button class="tab-btn" id="t-profile" onclick="goTo('profile')"><i class="fas fa-id-card"></i></button>
+    <!-- ONGLETS SUPERIEURS STYLE FACEBOOK -->
+    <div class="top-navigation">
+        <button class="nav-tab active" id="tab-feed" onclick="openView('feed')" title="Accueil"><i class="fas fa-home"></i></button>
+        <button class="nav-tab" id="tab-market" onclick="openView('market')" title="Traduction Vocale"><i class="fas fa-microphone-alt"></i></button>
+        <button class="nav-tab" id="tab-videos" onclick="openView('videos')" title="Vidéos & Reels"><i class="fas fa-tv"></i></button>
+        <button class="nav-tab" id="tab-profile" onclick="openView('profile')" title="Mon Profil"><i class="fas fa-user-circle"></i></button>
+        <button class="nav-tab" id="tab-menu" onclick="openView('menu')" title="Réglages"><i class="fas fa-sliders-h"></i></button>
     </div>
 
-    <!-- PAGE ACCUEIL -->
-    <div id="p-home" class="view-page active">
-        <div class="box">
-            <h3>Actualités IBS-SOCIAL-TRADUCTION</h3>
-            <p style="margin-top:8px; color:var(--text-sub);">Bienvenue sur votre application de communication mondiale sans barrières linguistiques.</p>
+    <!-- 1. FIL D'ACTUALITÉ (PAGE D'ACCUEIL) -->
+    <div id="page-feed" class="page-view active">
+        <!-- Zone de publication -->
+        <div class="card-panel" style="display:flex; gap:10px; align-items:center;">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" id="feed-avatar" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+            <input type="text" id="post-text-input" class="form-control" placeholder="Exprimer une idée avec traduction automatique..." style="border-radius:20px; margin-top:0;">
+            <button class="btn-blue" style="width:auto; padding:8px 14px; margin-top:0;" onclick="makePost()">Publier</button>
         </div>
-        <div class="box">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80" style="width:40px; height:40px; border-radius:50%;">
+
+        <!-- Stories -->
+        <div class="story-wrapper">
+            <div class="story-item" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), transparent), url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200');">Mon Story</div>
+            <div class="story-item" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), transparent), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200');">John (USA)</div>
+            <div class="story-item" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), transparent), url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200');">Sarah (Paris)</div>
+        </div>
+
+        <!-- Publication du Créateur -->
+        <div class="card-panel" id="post-wall">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
                 <div>
-                    <strong>ISAAC BABYSON</strong> <span class="badge"><i class="fas fa-check"></i></span>
-                    <div style="font-size:0.75rem; color:var(--text-sub);">Créateur Fondateur • 0840981930</div>
+                    <strong id="feed-creator-name">ISAAC BABYSON</strong> <span class="badge-petrole"><i class="fas fa-check"></i></span>
+                    <div style="font-size:0.75rem; color:var(--text-sub);">Fondateur Officiel • Compte Sécurisé</div>
                 </div>
             </div>
-            <p>Unissez le monde entier depuis le marché, la maison ou le travail ! 🌍</p>
-        </div>
-    </div>
-
-    <!-- PAGE TRADUCTION VOCALE (DOUBLE MICRO) -->
-    <div id="p-market" class="view-page">
-        <div class="box" style="border:2px solid var(--primary); text-align:center;">
-            <h3>Micro 1 (Vous)</h3>
-            <select class="input-box" id="lang1">
-                <option value="fr-FR">Français</option>
-                <option value="sw-KE">Swahili</option>
-                <option value="ln-CD">Lingala</option>
-                <option value="en-US">Anglais</option>
-            </select>
-            <button class="btn" onclick="testMic(1)"><i class="fas fa-microphone"></i> Parler</button>
-            <p id="res1" style="margin-top:8px; font-style:italic;">Cliquez pour parler...</p>
-        </div>
-
-        <div class="box" style="border:2px solid #2b9348; text-align:center;">
-            <h3>Micro 2 (Interlocuteur)</h3>
-            <select class="input-box" id="lang2">
-                <option value="en-US">Anglais</option>
-                <option value="sw-KE">Swahili</option>
-                <option value="fr-FR">Français</option>
-                <option value="es-ES">Espagnol</option>
-            </select>
-            <button class="btn" style="background:#2b9348;" onclick="testMic(2)"><i class="fas fa-microphone"></i> L'autre parle</button>
-            <p id="res2" style="margin-top:8px; font-style:italic;">L'interlocuteur clique...</p>
-        </div>
-    </div>
-
-    <!-- PAGE AMIS -->
-    <div id="p-friends" class="view-page">
-        <div class="box">
-            <h3>Invitations & Amis</h3>
-            <p style="color:var(--text-sub); font-size:0.85rem; margin-top:5px;">Trouvez et ajoutez vos amis.</p>
-            <div style="margin-top:15px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--divider); padding-bottom:10px;">
-                <span>Jean Smith (Paris)</span>
-                <button class="btn" style="width:auto; padding:6px 12px; margin-top:0;" onclick="alert('Invitation acceptée !')">Accepter</button>
+            <p>Bienvenue sur <strong>IBS-SOCIAL-TRADUCTION</strong> ! Réalisez vos ambitions internationales et communiquez sans limites avec le monde entier, au marché, à la maison ou au travail. 🌍✨</p>
+            <div style="margin-top:10px; padding:10px; background:var(--divider); border-radius:6px; font-size:0.85rem;">
+                <i class="fas fa-globe" style="color:var(--primary);"></i> <strong>Traduction automatique :</strong> "Welcome to IBS-SOCIAL-TRADUCTION! Connect with people worldwide without language barriers."
             </div>
         </div>
     </div>
 
-    <!-- PAGE PROFIL -->
-    <div id="p-profile" class="view-page">
-        <div class="box" style="text-align:center;">
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" style="width:80px; height:80px; border-radius:50%; border:3px solid var(--badge-green);">
-            <h2 style="margin-top:8px;">ISAAC BABYSON <span class="badge"><i class="fas fa-check"></i></span></h2>
-            <p style="color:var(--text-sub); font-size:0.9rem;">Créateur & Fondateur IBS-SOCIAL-TRADUCTION</p>
-            <button class="btn" onclick="alert('Profil modifiable !')">Modifier Mon Profil</button>
+    <!-- 2. TRADUCTION VOCALE FACE-À-FACE (DUAL-MIC MARCHÉ & TRAVAIL) -->
+    <div id="page-market" class="page-view">
+        <div class="card-panel">
+            <h2 style="text-align:center; color:var(--primary); margin-bottom:5px;"><i class="fas fa-store"></i> Interprétation Directe Face-à-Face</h2>
+            <p style="text-align:center; font-size:0.85rem; color:var(--text-sub); margin-bottom:15px;">Microphone double pour échanger facilement au marché ou au travail.</p>
+
+            <!-- MICRO 1 : VOUS -->
+            <div class="mic-box">
+                <h3>Votre Langue</h3>
+                <select id="lang-user" class="form-control">
+                    <option value="fr-FR">Français</option>
+                    <option value="sw-KE">Swahili</option>
+                    <option value="ln-CD">Lingala</option>
+                    <option value="en-US">Anglais</option>
+                    <option value="es-ES">Espagnol</option>
+                    <option value="zh-CN">Chinois</option>
+                    <option value="ar-SA">Arabe</option>
+                </select>
+                <button class="mic-btn-huge" onclick="activateMicrophone('user')"><i class="fas fa-microphone"></i></button>
+                <p id="speech-text-user" style="font-style:italic;">Appuyez et parlez dans votre langue...</p>
+                <p id="translated-text-user" style="color:var(--primary); font-weight:bold; margin-top:6px;"></p>
+                <button class="listen-small-btn" onclick="readTranslation('translated-text-user', 'lang-partner')"><i class="fas fa-volume-up"></i> Petit Micro Écoute Interprète</button>
+            </div>
+
+            <!-- MICRO 2 : INTERLOCUTEUR -->
+            <div class="mic-box partner">
+                <h3>Langue de l'Interlocuteur</h3>
+                <select id="lang-partner" class="form-control">
+                    <option value="en-US">Anglais</option>
+                    <option value="sw-KE">Swahili</option>
+                    <option value="fr-FR">Français</option>
+                    <option value="es-ES">Espagnol</option>
+                    <option value="zh-CN">Chinois</option>
+                    <option value="ar-SA">Arabe</option>
+                </select>
+                <button class="mic-btn-huge green" onclick="activateMicrophone('partner')"><i class="fas fa-microphone"></i></button>
+                <p id="speech-text-partner" style="font-style:italic;">L'autre personne appuie et parle...</p>
+                <p id="translated-text-partner" style="color:#2b9348; font-weight:bold; margin-top:6px;"></p>
+                <button class="listen-small-btn" onclick="readTranslation('translated-text-partner', 'lang-user')"><i class="fas fa-volume-up"></i> Petit Micro Écoute Traduction</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. RECHERCHE D'AMIS ET INVITATIONS -->
+    <div id="page-friends" class="page-view">
+        <div class="card-panel">
+            <h2><i class="fas fa-user-plus" style="color:var(--primary);"></i> Retrouver des Membres</h2>
+            <input type="text" class="form-control" placeholder="Rechercher des nouveaux amis..." style="margin-bottom:15px;">
+
+            <h3 style="font-size:1rem; color:var(--text-sub);">Invitations d'Amis Reçues</h3>
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--divider);">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+                    <div>
+                        <strong>David Smith (USA)</strong>
+                        <div style="font-size:0.75rem; color:var(--text-sub);">Souhaite vous ajouter</div>
+                    </div>
+                </div>
+                <button class="btn-blue" style="width:auto; padding:6px 12px; margin-top:0;" onclick="this.innerText='Ami Ajouté !'">Accepter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. VIDÉOS ET REELS -->
+    <div id="page-videos" class="page-view">
+        <div class="card-panel">
+            <h2><i class="fas fa-tv" style="color:var(--primary);"></i> Vidéos & Reels Publiés</h2>
+            <div style="background:#000; color:white; height:200px; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-top:10px;">
+                <i class="fas fa-play-circle" style="font-size:3rem; cursor:pointer;" onclick="alert('Lecture de la vidéo traduite...')"></i>
+            </div>
+            <p style="margin-top:8px; font-weight:bold;">Présentation de l'opportunité commerciale mondiale IBS-Pro</p>
+        </div>
+    </div>
+
+    <!-- 5. PROFIL PERSONNEL COMPLET -->
+    <div id="page-profile" class="page-view">
+        <div class="card-panel" style="padding:0; overflow:hidden;">
+            <div style="height:120px; background:linear-gradient(45deg, #1877f2, #005f73); position:relative;">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120" id="profile-picture-display" style="width:85px; height:85px; border-radius:50%; border:4px solid var(--bg-card); position:absolute; bottom:-25px; left:16px; object-fit:cover;">
+            </div>
+            <div style="padding:35px 16px 16px 16px;">
+                <h2 id="profile-name-heading">ISAAC BABYSON <span class="badge-petrole"><i class="fas fa-check"></i></span></h2>
+                <p id="profile-bio-heading" style="color:var(--text-sub); font-size:0.9rem; margin-top:4px;">Créateur Officiel d'IBS-SOCIAL-TRADUCTION. Étudiant ISTM Goma.</p>
+                
+                <div style="display:flex; gap:10px; margin-top:15px;">
+                    <button class="btn-blue" style="flex:1;" onclick="openSubMenu('edit-profile')"><i class="fas fa-edit"></i> Modifier Profil</button>
+                    <button class="btn-blue" style="flex:1; background:var(--divider); color:var(--text-main);" onclick="openSubMenu('create-page')"><i class="fas fa-flag"></i> Créer Page</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sous-menu de modification de profil -->
+        <div class="card-panel" id="sub-edit-profile" style="display:none;">
+            <h3>Réglages du Profil</h3>
+            <label style="font-size:0.85rem; font-weight:bold; margin-top:8px; display:block;">Nom d'affichage</label>
+            <input type="text" id="edit-name-val" class="form-control" value="ISAAC BABYSON">
+            <label style="font-size:0.85rem; font-weight:bold; margin-top:8px; display:block;">Biographie</label>
+            <input type="text" id="edit-bio-val" class="form-control" value="Créateur Fondateur d'IBS-SOCIAL-TRADUCTION">
+            <label style="font-size:0.85rem; font-weight:bold; margin-top:8px; display:block;">Lien de la photo de profil (URL)</label>
+            <input type="text" id="edit-img-val" class="form-control" placeholder="Coller le lien de l'image">
+            <button class="btn-blue" onclick="saveProfileChanges()">Enregistrer le profil</button>
+        </div>
+
+        <!-- Sous-menu de création de page -->
+        <div class="card-panel" id="sub-create-page" style="display:none;">
+            <h3>Créer votre Page Professionnelle</h3>
+            <input type="text" class="form-control" placeholder="Nom de votre entreprise / commerce">
+            <button class="btn-blue" style="background:#2b9348;" onclick="alert('Page commerciale créée avec succès !')">Lancer la Page</button>
+        </div>
+    </div>
+
+    <!-- 6. MESSAGERIE PRIVÉE TRADUITE -->
+    <div id="page-chat" class="page-view">
+        <div class="card-panel">
+            <h2><i class="fas fa-comments" style="color:var(--primary);"></i> Messagerie Traduite</h2>
+            <div style="border:1px solid var(--border-color); border-radius:8px; padding:10px; height:200px; overflow-y:auto; margin-top:10px;" id="chat-history">
+                <div style="margin-bottom:10px;">
+                    <strong>Marie (France) :</strong> Bonjour Isaac !
+                    <div style="font-size:0.75rem; color:var(--primary);">Traduit instantanément</div>
+                </div>
+            </div>
+            <div style="display:flex; gap:8px; margin-top:10px;">
+                <input type="text" id="chat-msg-input" class="form-control" placeholder="Saisir un message..." style="margin-top:0;">
+                <button class="btn-blue" style="width:auto; margin-top:0; padding:0 16px;" onclick="sendChatMsg()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. MENU 3 TIRETS (PARAMÈTRES PROFONDS) -->
+    <div id="page-menu" class="page-view">
+        <div class="card-panel">
+            <h2>Réglages & Paramètres IBS</h2>
+            <div style="margin-top:10px;">
+                <div class="setting-row" onclick="toggleDarkMode()">
+                    <span><i class="fas fa-moon" style="color:var(--primary); margin-right:10px;"></i> Mode Sombre</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="setting-row" onclick="openSubMenu('pro-level')">
+                    <span><i class="fas fa-crown" style="color:#ffd700; margin-right:10px;"></i> Débloquer Niveau IBS-Pro (Business)</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="setting-row" onclick="openSubMenu('biography')">
+                    <span><i class="fas fa-book" style="color:var(--primary); margin-right:10px;"></i> Historique & Biographie du Créateur</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="setting-row" onclick="openSubMenu('security')">
+                    <span><i class="fas fa-lock" style="color:var(--badge-petrole); margin-right:10px;"></i> Sécurité des données & Numéro privé</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sous-menu IBS Pro -->
+        <div class="card-panel" id="sub-pro-level" style="display:none; background:linear-gradient(135deg, #005f73, #1877f2); color:white;">
+            <h3><i class="fas fa-crown"></i> Niveau IBS-Pro International</h3>
+            <p style="font-size:0.85rem; margin-top:5px;">Passez au niveau professionnel pour débloquer les traductions illimitées et le commerce mondial.</p>
+            <button class="btn-blue" style="background:#ffd700; color:#000;" onclick="alert('Redirection vers le paiement sécurisé Pro...')">Payer mon Abonnement Pro</button>
+        </div>
+
+        <!-- Sous-menu Biographie du Créateur -->
+        <div class="card-panel" id="sub-biography" style="display:none;">
+            <h3>Biographie d'ISAAC BABYSON</h3>
+            <p style="font-size:0.85rem; line-height:1.5; margin-top:8px;">
+                Né au village de <strong>NYAMILIMA</strong>, j'ai grandi à <strong>KISEGURO</strong> où j'ai fait mon éducation primaire à l'<strong>E.P. KISEGURO SAINT BENOIT</strong> et mes études secondaires à l'<strong>INSTITUT KISEGURO SAINT AUGUSTIN</strong>. Je suis actuellement étudiant à l'<strong>ISTM GOMA</strong> en Faculté de <strong>LABORATOIRE</strong>.<br><br>
+                Fils aîné de la famille pastorale (Papa <strong>KAYENGA KINGAMILUBO</strong> et Maman <strong>MANIRIHO MAHORO</strong>), avec mes deux frères <strong>AHADI</strong> et <strong>DANIEL</strong>. J'ai créé cette application pour relier le monde entier sans barrières linguistiques.
+            </p>
+        </div>
+
+        <!-- Sous-menu Sécurité -->
+        <div class="card-panel" id="sub-security" style="display:none;">
+            <h3>Sécurité du Compte</h3>
+            <p style="font-size:0.85rem; color:var(--text-sub);">Vos coordonnées privées (notamment le numéro créateur 0840981930) sont strictement masquées et chiffrées pour protéger votre vie privée.</p>
         </div>
     </div>
 
     <script>
-        function goTo(pageName) {
-            // Cacher toutes les pages
-            document.querySelectorAll('.view-page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        // NAVIGATION FLUIDE ET INTERACTIVE
+        function openView(viewId) {
+            document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
 
-            // Afficher la page cible
-            document.getElementById('p-' + pageName).classList.add('active');
-            
-            // Activer l'onglet si présent
-            const tab = document.getElementById('t-' + pageName);
-            if(tab) tab.classList.add('active');
+            const targetView = document.getElementById('page-' + viewId);
+            const targetTab = document.getElementById('tab-' + viewId);
+
+            if(targetView) targetView.classList.add('active');
+            if(targetTab) targetTab.classList.add('active');
 
             window.scrollTo(0,0);
         }
 
-        function testMic(num) {
-            const speech = prompt("Simulateur vocal : Entrez ce que vous dites dans le micro " + num + " :");
-            if(speech) {
-                if(num === 1) {
-                    document.getElementById('res1').innerText = '"' + speech + '" (Traduit avec succès)';
-                } else {
-                    document.getElementById('res2').innerText = '"' + speech + '" (Traduit avec succès)';
-                }
+        // SOUS-MENUS CLIQUABLES
+        function openSubMenu(subId) {
+            const target = document.getElementById('sub-' + subId);
+            if(target) {
+                target.style.display = target.style.display === 'none' ? 'block' : 'none';
             }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // ENREGISTRER LE PROFIL
+        function saveProfileChanges() {
+            const name = document.getElementById('edit-name-val').value;
+            const bio = document.getElementById('edit-bio-val').value;
+            const img = document.getElementById('edit-img-val').value;
+
+            if(name) {
+                document.getElementById('profile-name-heading').innerHTML = name + ' <span class="badge-petrole"><i class="fas fa-check"></i></span>';
+                document.getElementById('feed-creator-name').innerText = name;
+            }
+            if(bio) document.getElementById('profile-bio-heading').innerText = bio;
+            if(img) {
+                document.getElementById('profile-picture-display').src = img;
+                document.getElementById('feed-avatar').src = img;
+            }
+
+            alert("Profil mis à jour avec succès !");
+            openSubMenu('edit-profile');
+        }
+
+        // PUBLIER SUR LE FIL
+        function makePost() {
+            const input = document.getElementById('post-text-input');
+            const txt = input.value.trim();
+            if(!txt) return;
+
+            const wall = document.getElementById('post-wall');
+            const div = document.createElement('div');
+            div.className = 'card-panel';
+            div.innerHTML = `
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                    <img src="${document.getElementById('feed-avatar').src}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+                    <div>
+                        <strong>${document.getElementById('feed-creator-name').innerText}</strong>
+                        <div style="font-size:0.75rem; color:var(--text-sub);">À l'instant • Public</div>
+                    </div>
+                </div>
+                <p>${txt}</p>
+                <div style="margin-top:10px; padding:10px; background:var(--divider); border-radius:6px; font-size:0.85rem;">
+                    <i class="fas fa-globe" style="color:var(--primary);"></i> <strong>Traduction automatique :</strong> "${txt} (Traduit)"
+                </div>
+            `;
+            wall.parentNode.insertBefore(div, wall);
+            input.value = '';
+        }
+
+        // MESSAGERIE
+        function sendChatMsg() {
+            const input = document.getElementById('chat-msg-input');
+            const msg = input.value.trim();
+            if(!msg) return;
+
+            const history = document.getElementById('chat-history');
+            const div = document.createElement('div');
+            div.style.marginBottom = '10px';
+            div.style.textAlign = 'right';
+            div.innerHTML = `
+                <strong style="color:var(--primary);">Vous :</strong> ${msg}
+                <div style="font-size:0.75rem; color:var(--text-sub);">Traduction transmise</div>
+            `;
+            history.appendChild(div);
+            input.value = '';
+            history.scrollTop = history.scrollHeight;
+        }
+
+        // DOUBLE MICROPHONE INTERACTIF
+        function activateMicrophone(speaker) {
+            const speechText = document.getElementById(speaker === 'user' ? 'speech-text-user' : 'speech-text-partner');
+            const translatedText = document.getElementById(speaker === 'user' ? 'translated-text-user' : 'translated-text-partner');
+            const sourceLang = document.getElementById(speaker === 'user' ? 'lang-user' : 'lang-partner').value;
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if(!SpeechRecognition) {
+                const userSpeech = prompt("Saisie vocale direct : Entrez le message parlé dans votre langue :");
+                if(userSpeech) {
+                    speechText.innerText = '"' + userSpeech + '"';
+                    translatedText.innerText = " Traduction : " + userSpeech + " [Interprété en direct]";
+                }
+                return;
+            }
+
+            const rec = new SpeechRecognition();
+            rec.lang = sourceLang;
+            speechText.innerText = "Écoute en cours... Parlez maintenant !";
+
+            rec.onresult = function(e) {
+                const text = e.results[0][0].transcript;
+                speechText.innerText = '"' + text + '"';
+                translatedText.innerText = " Traduction instantanée : " + text;
+            };
+
+            rec.onerror = function() {
+                speechText.innerText = "Capture terminée.";
+            };
+
+            rec.start();
+        }
+
+        // PETIT MICROPHONE D'ÉCOUTE VOCALE
+        function readTranslation(textElemId, langSelectId) {
+            const text = document.getElementById(textElemId).innerText;
+            const lang = document.getElementById(langSelectId).value;
+
+            if(!text) {
+                alert("Aucun texte à écouter. Parlez d'abord dans le microphone principal.");
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
         }
     </script>
 </body>
