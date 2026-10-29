@@ -1,23 +1,196 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10172a"><meta name="description" content="IBS WORLD, créé par ISAAC BABYSON GUY"><link rel="manifest" href="manifest.json"><title>IBS WORLD</title>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IBS-SOCIAL-TRADUCTION</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--bg:#0b1020;--p:#121a2e;--p2:#1b2944;--line:#2a3958;--t:#f5f7ff;--m:#aab5cc;--b:#4f8cff;--c:#35d6c2}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#1a2b52,#0b1020 45%);color:var(--t);font:16px/1.45 system-ui,Arial}header{position:sticky;top:0;background:#0b1020ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px;display:flex;align-items:center;justify-content:space-between;z-index:5}.brand{display:flex;gap:10px;align-items:center}.logo,.avatar{display:grid;place-items:center;background:linear-gradient(135deg,var(--b),var(--c));color:#071021;font-weight:900;border-radius:15px}.logo{width:43px;height:43px}.brand small{display:block;color:var(--m);font-size:10px}.brand strong{letter-spacing:1px}button,input,textarea,select{font:inherit}button{border:0;border-radius:12px;background:var(--b);color:white;padding:10px 13px;font-weight:700;cursor:pointer}.secondary{background:#263552}.icon{font-size:20px;padding:9px 12px}main{max-width:1050px;margin:auto;padding:14px 12px 95px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:14px}aside,.card{background:var(--p);border:1px solid var(--line);border-radius:20px}aside{padding:12px;height:max-content;position:sticky;top:78px}.nav{display:block;width:100%;text-align:left;background:transparent;color:#dce6ff;margin:4px 0}.nav.active,.nav:hover{background:#263956}.content{min-width:0}.hero{background:linear-gradient(120deg,#1a3562,#142f3d);border:1px solid #31517c;border-radius:23px;padding:22px;margin-bottom:14px}.eyebrow{color:var(--c);font-size:11px;letter-spacing:1.5px;font-weight:900}.hero h1{font-size:clamp(27px,5vw,38px);line-height:1.1;margin:8px 0}.hero p,.muted{color:var(--m)}.card{padding:15px;margin-bottom:14px}.row{display:flex;align-items:center;gap:10px}.avatar{width:42px;height:42px;flex-shrink:0;border-radius:50%}.small{font-size:12px;color:var(--m)}textarea,input,select{width:100%;background:#0b1223;color:white;border:1px solid var(--line);border-radius:12px;padding:12px}textarea{min-height:90px;resize:vertical;margin:12px 0}.tools{display:flex;gap:7px;flex-wrap:wrap}.post{padding:0;overflow:hidden}.posthead{padding:14px 14px 0}.postbody{padding:10px 14px;white-space:pre-wrap;overflow-wrap:anywhere}.post img,.post video{width:100%;max-height:350px;object-fit:contain;background:#080d19}.actions{display:flex;gap:7px;flex-wrap:wrap;border-top:1px solid var(--line);padding:10px 14px}.actions button{font-size:13px;padding:8px}.comment{font-size:13px;padding:4px 14px;color:#dce6ff}.commentbox{display:flex;gap:7px;padding:10px 14px}.commentbox input{min-width:0}.section{display:none}.section.active{display:block}.notice{background:#2a2518;border:1px solid #66512a;border-radius:12px;padding:11px;color:#ffdfa1;font-size:12px;margin-top:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result{white-space:pre-wrap;min-height:65px;background:#0b1223;border:1px dashed #385173;border-radius:12px;padding:12px;margin:10px 0}.empty{text-align:center;padding:24px;color:var(--m)}.bottom{display:none;position:fixed;bottom:0;left:0;right:0;z-index:6;background:#0b1020f2;border-top:1px solid var(--line);justify-content:space-around;padding:6px 3px calc(6px + env(safe-area-inset-bottom))}.bottom button{background:transparent;color:var(--m);font-size:11px;padding:6px}.bottom button b{display:block;font-size:19px}.bottom button.active{color:var(--c)}footer{text-align:center;color:#8290aa;font-size:11px;padding:12px}@media(max-width:720px){main{display:block}aside{display:none}.bottom{display:flex}.grid{grid-template-columns:1fr}.hero{padding:18px}}
-</style></head><body>
-<header><div class="brand"><div class="logo">IBS</div><div><strong>IBS WORLD</strong><small>SOCIAL · TRADUCTION · COMMUNAUTÉ</small></div></div><button class="icon" onclick="show('profile')">☺</button></header>
-<main><aside><div class="row"><div class="avatar">IB</div><div><b>IBS WORLD</b><div class="small">Une vision mondiale</div></div></div><p class="small">ESPACE PRINCIPAL</p><button class="nav active" data-id="home" onclick="show('home')">⌂ Fil d'actualité</button><button class="nav" data-id="translate" onclick="show('translate')">🌐 IBS Traduction</button><button class="nav" data-id="messages" onclick="show('messages')">✉ Messages</button><button class="nav" data-id="community" onclick="show('community')">♧ Communauté</button><button class="nav" data-id="profile" onclick="show('profile')">☺ Mon profil</button><div class="card"><b>Innovation africaine 🇨🇩</b><p class="small">Créé par ISAAC BABYSON GUY — Kiseguro, Rutshuru, Nord-Kivu.</p></div></aside>
-<div class="content">
-<section id="home" class="section active"><div class="hero"><div class="eyebrow">UNE COMMUNAUTÉ SANS FRONTIÈRES</div><h1>Le monde entier,<br>une seule communauté.</h1><p>Partage tes idées, rencontre des créateurs et rapproche les langues grâce à IBS WORLD.</p><b>ISAAC BABYSON GUY · RDC 🇨🇩</b></div>
-<div class="card"><h3>Créer une publication</h3><textarea id="postText" placeholder="Quoi de neuf ? Partage une idée avec le monde…"></textarea><div class="tools"><label><input id="media" type="file" accept="image/*,video/*" style="max-width:200px;padding:7px"></label><button onclick="publish()">＋ Publier</button></div></div><div id="feed"></div><div class="notice">Version prototype : les publications sont enregistrées seulement sur cet appareil. Les comptes, amis, messagerie en direct et partage entre utilisateurs nécessitent un serveur sécurisé.</div></section>
-<section id="translate" class="section"><div class="hero"><div class="eyebrow">IBS TRADUCTION</div><h1>Les langues ne doivent plus nous séparer.</h1><p>Prépare un message et utilise la voix du téléphone si elle est disponible.</p></div><div class="card"><h2>Traducteur multilingue</h2><div class="grid"><div><label class="small">Langue d'origine</label><select id="from"><option value="auto">Détection automatique</option><option value="fr">Français</option><option value="en">Anglais</option><option value="sw">Swahili</option><option value="es">Espagnol</option><option value="de">Allemand</option><option value="pt">Portugais</option></select></div><div><label class="small">Traduire vers</label><select id="to"><option value="en">Anglais</option><option value="fr">Français</option><option value="sw">Swahili</option><option value="es">Espagnol</option><option value="de">Allemand</option><option value="pt">Portugais</option></select></div></div><textarea id="transText" placeholder="Écris ou dicte ton message…"></textarea><div class="tools"><button onclick="translate()">🌐 Traduire</button><button class="secondary" onclick="dictate()">🎤 Dicter</button><button class="secondary" onclick="speak()">🔊 Écouter</button><button class="secondary" onclick="copy()">Copier</button></div><div id="result" class="result">Le résultat apparaîtra ici.</div><div class="notice">Le moteur de traduction n'est pas encore connecté : ce prototype ne prétend pas traduire automatiquement. Nous connecterons ensuite un service réel.</div></div></section>
-<section id="messages" class="section"><div class="hero"><div class="eyebrow">MESSAGERIE IBS</div><h1>Parler au-delà des frontières.</h1><p>Un espace prévu pour les conversations privées et la traduction des messages.</p></div><div class="card empty">✉️<h3>Messagerie en préparation</h3>Les messages en temps réel seront activés après connexion des comptes et du serveur.</div></section>
-<section id="community" class="section"><div class="hero"><div class="eyebrow">COMMUNAUTÉ</div><h1>Les idées rapprochent les personnes.</h1><p>Un espace pour les créateurs, musiciens, étudiants et entrepreneurs.</p></div><div class="card"><h3>Communauté internationale</h3><p class="muted">La recherche d'amis, les groupes et les demandes de contact nécessitent des comptes en ligne.</p><button onclick="show('home')">Publier une idée</button></div></section>
-<section id="profile" class="section"><div class="hero"><div class="eyebrow">MON IDENTITÉ NUMÉRIQUE</div><h1>Mon profil</h1></div><div class="card"><div class="row"><div class="avatar">IB</div><div><h2>ISAAC BABYSON GUY</h2><div class="muted">Fondateur du projet IBS WORLD · RDC</div></div></div><label class="small">Nom affiché</label><input id="name" value="ISAAC BABYSON GUY"><label class="small">À propos</label><textarea id="bio">Innovation africaine, vision mondiale. Originaire de Kiseguro, Rutshuru, Nord-Kivu, RDC.</textarea><button onclick="localStorage.setItem('ibsName',name.value);localStorage.setItem('ibsBio',bio.value);alert('Profil sauvegardé sur cet appareil.')">Enregistrer sur cet appareil</button><div class="notice">Ce n'est pas encore un compte sécurisé accessible depuis d'autres téléphones.</div></div></section>
-<footer>IBS WORLD · Prototype 0.2 · Créé par ISAAC BABYSON GUY</footer></div></main>
-<nav class="bottom"><button data-id="home" class="active" onclick="show('home')"><b>⌂</b>Accueil</button><button data-id="translate" onclick="show('translate')"><b>🌐</b>Traduire</button><button data-id="messages" onclick="show('messages')"><b>✉</b>Messages</button><button data-id="community" onclick="show('community')"><b>♧</b>Communauté</button><button data-id="profile" onclick="show('profile')"><b>☺</b>Profil</button></nav>
+:root{--bg:#ffffff;--bg2:#f0f2f5;--text:#050505;--card:#fff;--blue:#0866ff;--border:#ddd;}
+body.dark{--bg:#18191a;--bg2:#242526;--text:#e4e6eb;--card:#242526;--border:#3e4042;}
+*{margin:0;padding:0;box-sizing:border-box;font-family: Segoe UI, Roboto, sans-serif;}
+body{background:var(--bg2);color:var(--text);transition:.2s;}
+header{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:8px 12px;}
+.logo{color:var(--blue);font-weight:900;font-size:22px;}
+.header-icons{display:flex;gap:10px;}
+.icon-btn{width:40px;height:40px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;color:var(--text);font-size:18px;}
+#app{max-width:600px;margin:0 auto;padding-bottom:70px;}
+.card{background:var(--card);border-radius:8px;margin:8px 0;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.1);}
+.hidden{display:none!important;}
+#createAccountPage{position:fixed;inset:0;background:var(--bg);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;}
+.form-box{width:100%;max-width:400px;background:var(--card);padding:20px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.2);}
+.form-box h2{margin-bottom:12px;color:var(--blue);}
+.form-box input, .form-box select{width:100%;padding:10px;margin:8px 0;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);}
+.btn-blue{background:var(--blue);color:white;border:none;padding:10px;width:100%;border-radius:6px;font-weight:bold;cursor:pointer;margin-top:10px;}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0;z-index:90;}
+.bottom-nav button{background:none;border:none;font-size:20px;color:var(--text);cursor:pointer;}
+.bottom-nav button.active{color:var(--blue);}
+.verified{color:var(--blue);margin-left:4px;}
+.profile-cover{height:180px;background:linear-gradient(135deg,#0866ff,#00c6ff);position:relative;border-radius:8px 8px 0 0;}
+.profile-pic{width:100px;height:100px;border-radius:50%;border:4px solid var(--card);position:absolute;bottom:-40px;left:20px;background:#ccc;object-fit:cover;}
+.setting-item{display:flex;justify-content:space-between;align-items:center;padding:14px 12px;border-bottom:1px solid var(--border);cursor:pointer;background:var(--card);}
+.setting-item:hover{background:var(--bg2);}
+.feed-img{width:100%;border-radius:8px;margin-top:8px;}
+.translate-btn{background:var(--card);border:1px solid var(--border);padding:6px 10px;border-radius:20px;font-size:12px;cursor:pointer;margin-top:6px;}
+</style>
+</head>
+<body>
+<div id="createAccountPage">
+  <div class="form-box">
+    <h2>Créer ton compte IBS</h2>
+    <p style="font-size:13px;margin-bottom:10px;">Gère toi-même ton compte. Sécurisé.</p>
+    <input id="regName" placeholder="Nom complet">
+    <input id="regPhone" placeholder="Numéro (ex: 0840981930)">
+    <input id="regPass" type="password" placeholder="Mot de passe">
+    <select id="regLang"><option>Français</option><option>English</option><option>Swahili</option><option>Lingala</option></select>
+    <button class="btn-blue" onclick="createAccount()">Créer et Continuer</button>
+  </div>
+</div>
+
+<header id="mainHeader" class="hidden">
+  <div class="logo">IBS-SOCIAL</div>
+  <div class="header-icons">
+    <button class="icon-btn" onclick="showPage('searchPage')"><i class="fa fa-search"></i></button>
+    <button class="icon-btn" onclick="showPage('messageriePage')"><i class="fab fa-facebook-messenger"></i></button>
+    <button class="icon-btn" onclick="showPage('videosPage')"><i class="fa fa-play"></i></button>
+    <button class="icon-btn" onclick="showPage('menuPage')"><i class="fa fa-bars"></i></button>
+  </div>
+</header>
+
+<div id="app" class="hidden">
+  <div id="homePage">
+    <div class="card" onclick="showPage('profilPage')" style="cursor:pointer;display:flex;align-items:center;gap:10px;">
+      <img id="homeAvatar" src="https://i.pravatar.cc/100" style="width:40px;height:40px;border-radius:50%;">
+      <div><b id="homeName">Moi</b> <i id="homeBadge" class="fa fa-check-circle verified hidden"></i><br><small style="color:gray;">Voir ton profil</small></div>
+    </div>
+    <div class="card"><div style="display:flex;gap:10px;"><img src="https://i.pravatar.cc/40?img=3" style="width:40px;border-radius:50%;"><input placeholder="Quoi de neuf ?" style="flex:1;background:var(--bg2);border:none;padding:10px;border-radius:20px;"></div></div>
+    <div id="feed"></div>
+  </div>
+
+  <div id="searchPage" class="hidden">
+    <div class="card"><h3><i class="fa fa-search"></i> Rechercher amis</h3><input id="searchInput" oninput="filterFriends()" placeholder="Tape un nom..." style="width:100%;padding:10px;border-radius:20px;border:1px solid var(--border);margin-top:10px;"></div>
+    <div id="friendsList"></div>
+  </div>
+
+  <div id="messageriePage" class="hidden"><div class="card"><h3>Messagerie</h3></div><div id="conversations"></div></div>
+
+  <div id="chatPage" class="hidden">
+    <div class="card" style="display:flex;align-items:center;gap:10px;"><button onclick="showPage('messageriePage')"><i class="fa fa-arrow-left"></i></button><b id="chatWith">Ami</b><span style="margin-left:auto;cursor:pointer;" onclick="showPage('chatSettingsPage')"><i class="fa fa-cog"></i> Paramètres conv.</span></div>
+    <div id="chatMessages" style="padding:10px;min-height:300px;"></div>
+    <div class="card" style="display:flex;gap:8px;position:sticky;bottom:60px;"><input id="chatInput" placeholder="Écrire..." style="flex:1;padding:10px;border-radius:20px;border:1px solid var(--border);"><button class="icon-btn" onclick="sendMsg()"><i class="fa fa-paper-plane" style="color:var(--blue)"></i></button><button class="icon-btn" onclick="translateChat()"><i class="fa fa-language"></i></button></div>
+  </div>
+
+  <div id="chatSettingsPage" class="hidden">
+    <div class="card"><button onclick="showPage('chatPage')"><i class="fa fa-arrow-left"></i> Retour</button><h3 style="margin-top:10px;">Paramètres conversation</h3></div>
+    <div class="setting-item" onclick="alert('Traduction vocale activée')">Traduction vocale <i class="fa fa-chevron-right"></i></div>
+    <div class="setting-item" onclick="alert('Traduction écrite activée')">Traduction écrite <i class="fa fa-chevron-right"></i></div>
+  </div>
+
+  <div id="videosPage" class="hidden"><div class="card"><h3>Vidéos publiées</h3></div><div id="videoFeed"></div></div>
+
+  <div id="menuPage" class="hidden">
+    <div class="card"><h3>Menu IBS</h3></div>
+    <div class="setting-item" onclick="showPage('profilPage')"><span><i class="fa fa-user"></i> Profil</span><i class="fa fa-chevron-right"></i></div>
+    <div class="setting-item" onclick="showPage('parametresPage')"><span><i class="fa fa-cog"></i> Paramètres & confidentialité</span><i class="fa fa-chevron-right"></i></div>
+    <div class="setting-item" onclick="showPage('createPagePage')"><span><i class="fa fa-flag"></i> Créer une Page</span><i class="fa fa-chevron-right"></i></div>
+    <div class="setting-item" onclick="showPage('traductionPage')"><span><i class="fa fa-language"></i> Traduction vocale/écrite</span><i class="fa fa-chevron-right"></i></div>
+  </div>
+
+  <div id="parametresPage" class="hidden">
+    <div class="card"><button onclick="showPage('menuPage')"><i class="fa fa-arrow-left"></i> Retour Menu</button><h3 style="margin-top:10px;">Paramètres & confidentialité</h3></div>
+    <div class="setting-item" onclick="showPage('parametresAppPage')"><span>Paramètres application</span><i class="fa fa-chevron-right"></i></div>
+    <div class="setting-item" onclick="showPage('securitePage')"><span>Sécurité du compte</span><i class="fa fa-chevron-right"></i></div>
+    <div class="setting-item" onclick="showPage('modeSombrePage')"><span>Mode d'affichage Blanc/Sombre</span><i class="fa fa-chevron-right"></i></div>
+  </div>
+
+  <div id="parametresAppPage" class="hidden"><div class="card"><button onclick="showPage('parametresPage')"><i class="fa fa-arrow-left"></i></button><h3>Paramètres application</h3></div><div class="setting-item">Langue <span>Français <i class="fa fa-chevron-right"></i></span></div><div class="setting-item">Notifications <i class="fa fa-toggle-on" style="color:var(--blue)"></i></div></div>
+  <div id="securitePage" class="hidden"><div class="card"><button onclick="showPage('parametresPage')"><i class="fa fa-arrow-left"></i></button><h3>Sécurité</h3><p style="font-size:13px;margin-top:10px;">Compte sécurisé. Badge bleu : créateur 0840981930 ou 10000 abonnés.</p></div><div class="setting-item">Changer mot de passe <i class="fa fa-chevron-right"></i></div><div class="setting-item">2FA <i class="fa fa-chevron-right"></i></div></div>
+  <div id="modeSombrePage" class="hidden"><div class="card"><button onclick="showPage('parametresPage')"><i class="fa fa-arrow-left"></i></button><h3>Mode sombre / clair</h3></div><div class="setting-item" onclick="setTheme('light')"><span><i class="fa fa-sun"></i> Blanc comme Facebook</span><i class="fa fa-check" id="checkLight"></i></div><div class="setting-item" onclick="setTheme('dark')"><span><i class="fa fa-moon"></i> Sombre</span><i class="fa fa-check hidden" id="checkDark"></i></div></div>
+
+  <div id="profilPage" class="hidden">
+    <div class="card" style="padding:0;overflow:hidden;"><div class="profile-cover"></div><div style="padding:50px 15px 15px;position:relative;"><img id="profilAvatar" src="https://i.pravatar.cc/150" class="profile-pic"><h2><span id="profilName">Moi</span> <i id="profilBadge" class="fa fa-check-circle verified hidden"></i></h2><p id="profilBio" style="color:gray;">Bio: Créateur IBS-SOCIAL | Bukavu</p><button class="btn-blue" style="width:auto;padding:6px 12px;margin-top:10px;" onclick="editBio()">Modifier bio / couverture / profession</button></div></div>
+    <div class="card" style="display:flex;justify-content:space-around;text-align:center;"><div onclick="showProfilTab('reels')"><i class="fa fa-film"></i><br><b>Réels</b></div><div onclick="showProfilTab('photos')"><i class="fa fa-image"></i><br><b>Photos</b></div><div onclick="showProfilTab('dashboard')"><i class="fa fa-chart-line"></i><br><b>Dashboard</b></div><div onclick="showProfilTab('archives')"><i class="fa fa-archive"></i><br><b>Archives</b></div></div>
+    <div id="profilContent" class="card"><p>Dashboard: <span id="followersCount">0</span> abonnés. Badge bleu si >=10000 ou créateur.</p></div>
+  </div>
+
+  <div id="createPagePage" class="hidden"><div class="card"><button onclick="showPage('menuPage')"><i class="fa fa-arrow-left"></i></button><h3>Créer ta Page</h3><input id="pageNameInput" placeholder="Nom de la page" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;border:1px solid var(--border);"><button class="btn-blue" onclick="createPage()">Créer Page</button></div></div>
+  <div id="traductionPage" class="hidden"><div class="card"><button onclick="showPage('menuPage')"><i class="fa fa-arrow-left"></i></button><h3>Traduction vocale & écrite</h3></div><div class="setting-item">Vocale <i class="fa fa-microphone"></i></div><div class="setting-item">Écrite <i class="fa fa-language"></i></div></div>
+</div>
+
+<div id="bottomNav" class="bottom-nav hidden">
+  <button id="navHome" class="active" onclick="showPage('homePage')"><i class="fa fa-home"></i></button>
+  <button onclick="showPage('searchPage')"><i class="fa fa-user-friends"></i></button>
+  <button onclick="showPage('videosPage')"><i class="fa fa-tv"></i></button>
+  <button onclick="showPage('messageriePage')"><i class="fab fa-facebook-messenger"></i></button>
+  <button onclick="showPage('menuPage')"><i class="fa fa-bars"></i></button>
+</div>
+
 <script>
-const $=id=>document.getElementById(id);let posts=JSON.parse(localStorage.getItem('ibsPosts')||'[]');
-function show(id){document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('[data-id]').forEach(x=>x.classList.toggle('active',x.dataset.id===id));scrollTo({top:0,behavior:'smooth'})}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function publish(){let text=$('postText').value.trim(),f=$('media').files[0];if(!text&&!f){alert('Ajoute un texte ou un média.');return}if(f&&f.size>1800000){alert('Pour cette démo, choisis un média de moins de 1,8 Mo.');return}let p={id:Date.now(),text,media:null,likes:0,comments:[],date:new Date().toLocaleString('fr-FR')};if(f){let r=new FileReader();r.onload=()=>{p.media={data:r.result,type:f.type};posts.unshift(p);save();$('postText').value='';$('media').value='';render()};r.readAsDataURL(f)}else{posts.unshift(p);save();$('postText').value='';render()}}
-function save(){try{localStorage.setItem('ibsPosts',JSON.stringify(posts))}catch(e){alert('Le stockage de ce navigateur est plein. Essaie sans média.')}}function render(){$('feed').innerHTML=posts.length?posts.map(p=>`<article class="card post"><div class="posthead row"><div class="avatar">IB</div><div><b>${esc(localStorage.getItem('ibsName')||'ISAAC BABYSON GUY')}</b><div class="small">${esc(p.date)}</div></div></div><div class="postbody">${esc(p.text)}</div>${p.media?(p.media.type.startsWith('video/')?`<video controls src="${p.media.data}"></video>`:`<img src="${p.media.data}" alt="Média">`):''}<div class="actions"><button class="secondary" onclick="like(${p.id})">❤️ ${p.likes} J'aime</button><button class="secondary" onclick="comment(${p.id})">💬 Commenter</button><button class="secondary" onclick="share(${p.id})">↗ Partager</button><button class="secondary" onclick="del(${p.id})">Supprimer</button></div>${p.comments.map(c=>`<div class="comment">${esc(c)}</div>`).join('')}</article>`).join(''):'<div class="card empty">🌱<h3>Ton fil commence ici</h3><p>Publie ton premier message pour présenter IBS WORLD.</p></div>'}function like(id){let p=posts.find(x=>x.id===id);p.likes++;save();render()}function comment(id){let t=prompt('Écris ton commentaire :');if(t&&t.trim()){posts.find(x=>x.id===id).comments.push(t.trim());save();render()}}function del(id){if(confirm('Supprimer cette publication locale ?')){posts=posts.filter(x=>x.id!==id);save();render()}}async function share(id){let p=posts.find(x=>x.id===id);try{if(navigator.share)await navigator.share({title:'IBS WORLD',text:p.text||'Découvre IBS WORLD'});else{await navigator.clipboard.writeText(p.text);alert('Texte copié.')}}catch(e){}}
-function translate(){if(!$('transText').value.trim()){alert('Écris un message.');return}$('result').textContent='Le moteur de traduction réel n’est pas encore connecté. Cette fonction sera activée en reliant un service de traduction.'}function dictate(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){alert('Dictée vocale indisponible dans ce navigateur.');return}let r=new SR();r.lang=$('from').value==='en'?'en-US':$('from').value==='sw'?'sw-TZ':'fr-FR';r.onresult=e=>$('transText').value=e.results[0][0].transcript;r.start()}function speak(){if(!('speechSynthesis'in window)){alert('Voix indisponible.');return}let u=new SpeechSynthesisUtterance($('transText').value||$('result').textContent);u.lang=$('to').value==='en'?'en-US':$('to').value==='sw'?'sw-TZ':'fr-FR';speechSynthesis.speak(u)}async function copy(){try{await navigator.clipboard.writeText($('result').textContent);alert('Copié.')}catch(e){alert('Sélectionne le texte et copie-le.')}}render();if(localStorage.getItem('ibsName'))$('name').value=localStorage.getItem('ibsName');if(localStorage.getItem('ibsBio'))$('bio').value=localStorage.getItem('ibsBio');if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
-</script></body></html>
+let currentUser = JSON.parse(localStorage.getItem('ibs_user') || 'null');
+let followers = parseInt(localStorage.getItem('ibs_followers')||'0');
+function init(){
+  if(currentUser){
+    document.getElementById('createAccountPage').classList.add('hidden');
+    document.getElementById('mainHeader').classList.remove('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    document.getElementById('bottomNav').classList.remove('hidden');
+    applyUser(); loadFeed(); loadFriends(); loadVideos();
+  }
+}
+function createAccount(){
+  const name=document.getElementById('regName').value.trim();
+  const phone=document.getElementById('regPhone').value.trim();
+  const pass=document.getElementById('regPass').value.trim();
+  if(!name||!phone||!pass) return alert('Remplis tout');
+  const isCreator=phone==='0840981930';
+  currentUser={name,phone,verified:isCreator,role:isCreator?'createur':'user'};
+  localStorage.setItem('ibs_user',JSON.stringify(currentUser));
+  followers=isCreator?15000:0;
+  localStorage.setItem('ibs_followers',followers);
+  init();
+}
+function applyUser(){
+  document.getElementById('homeName').innerText=currentUser.name;
+  document.getElementById('profilName').innerText=currentUser.name;
+  document.getElementById('followersCount').innerText=followers;
+  if(currentUser.phone==='0840981930'||followers>=10000){
+    document.getElementById('homeBadge').classList.remove('hidden');
+    document.getElementById('profilBadge').classList.remove('hidden');
+  }
+}
+function showPage(id){
+  ['homePage','searchPage','messageriePage','chatPage','chatSettingsPage','videosPage','menuPage','parametresPage','parametresAppPage','securitePage','modeSombrePage','profilPage','createPagePage','traductionPage'].forEach(p=>{
+    const el=document.getElementById(p); if(el) el.classList.add('hidden');
+  });
+  document.getElementById(id).classList.remove('hidden');
+}
+function loadFeed(){
+  const feed=document.getElementById('feed'); feed.innerHTML='';
+  const posts=[{name:'Grace M.',text:'Bukavu ce matin ! Traduction Swahili -> Français OK',img:'https://picsum.photos/600/400?random=1'},{name:'Isaac Babyson',text:'IBS-SOCIAL-TRADUCTION avance. Mode sombre ajouté.',verified:true,img:'https://picsum.photos/600/400?random=2'}];
+  posts.forEach(p=>{
+    const badge=p.verified?'<i class="fa fa-check-circle verified"></i>':'';
+    feed.innerHTML+=`<div class="card"><div style="display:flex;gap:10px;"><img src="https://i.pravatar.cc/40?u=${p.name}" style="width:40px;border-radius:50%;"><b>${p.name} ${badge}</b></div><p style="margin-top:8px;">${p.text}</p><img src="${p.img}" class="feed-img"><button class="translate-btn" onclick="alert('Traduction vocale/écrite')"><i class="fa fa-language"></i> Traduire</button></div>`;
+  });
+}
+const friendsData=['Aline K.','David M.','Esther B.','Joel S.','Merveille T.'];
+function loadFriends(){
+  const list=document.getElementById('friendsList'); const conv=document.getElementById('conversations'); list.innerHTML=''; conv.innerHTML='';
+  friendsData.forEach(f=>{
+    list.innerHTML+=`<div class="setting-item" onclick="openChat('${f}')"><span><img src="https://i.pravatar.cc/40?u=${f}" style="width:30px;border-radius:50%;margin-right:8px;">${f}</span><button class="btn-blue" style="width:auto;padding:4px 10px;">Inviter</button></div>`;
+    conv.innerHTML+=`<div class="setting-item" onclick="openChat('${f}')"><span><img src="https://i.pravatar.cc/40?u=${f}" style="width:35px;border-radius:50%;margin-right:8px;">${f}</span><small>Dernière conv...</small></div>`;
+  });
+}
+function filterFriends(){const q=document.getElementById('searchInput').value.toLowerCase(); document.querySelectorAll('#friendsList .setting-item').forEach(el=>{el.style.display=el.innerText.toLowerCase().includes(q)?'flex':'none';});}
+function openChat(name){document.getElementById('chatWith').innerText=name; showPage('chatPage'); document.getElementById('chatMessages').innerHTML=`<div class="card" style="background:var(--blue);color:white;width:fit-content;">Salut ${name} !</div>`;}
+function sendMsg(){const i=document.getElementById('chatInput'); if(!i.value) return; document.getElementById('chatMessages').innerHTML+=`<div class="card" style="background:var(--bg2);margin-left:auto;width:fit-content;">${i.value}</div>`; i.value='';}
+function translateChat(){alert('Traduction vocale/écrite activée');}
+function loadVideos(){const vf=document.getElementById('videoFeed'); vf.innerHTML=''; for(let i=1;i<=3;i++){vf.innerHTML+=`<div class="card"><b>Vidéo utilisateur ${i}</b><div style="height:200px;background:#000;color:white;display:flex;align-items:center;justify-content:center;border-radius:8px;margin-top:8px;">VIDEO ▶️</div><button class="translate-btn"><i class="fa fa-language"></i> Traduire audio</button></div>`;}}
+function setTheme(t){if(t==='dark'){document.body.classList.add('dark'); document.getElementById('checkDark').classList.remove('hidden'); document.getElementById('checkLight').classList.add('hidden');} else {document.body.classList.remove('dark'); document.getElementById('checkDark').classList.add('hidden'); document.getElementById('checkLight').classList.remove('hidden');} localStorage.setItem('ibs_theme',t);}
+function showProfilTab(tab){document.getElementById('profilContent').innerHTML=tab==='reels'?'Tes Réels personnels ici':tab==='photos'?'Tes Photos':tab==='dashboard'?`Dashboard: ${followers} abonnés. Badge bleu auto si >=10000 ou 0840981930`:'Archives des stories';}
+function editBio(){const b=prompt('Nouvelle bio/profession:'); if(b){document.getElementById('profilBio').innerText=b;}}
+function createPage(){const n=document.getElementById('pageNameInput').value; if(!n) return alert('Nom page'); const hasBadge=currentUser.phone==='0840981930'; alert(`Page "${n}" créée ${hasBadge?'avec badge bleu créateur !':'sans badge (il faut 10000 abonnés)'}`); showPage('profilPage');}
+const savedTheme=localStorage.getItem('ibs_theme'); if(savedTheme) setTheme(savedTheme);
+init();
+</script>
+</body>
+      </html>
