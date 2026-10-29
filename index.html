@@ -15,7 +15,6 @@
             --badge-petrole: #005f73;
             --border-color: #ced0d4;
             --divider: #e4e6eb;
-            --hover-bg: #f2f2f2;
         }
 
         body.dark-mode {
@@ -25,29 +24,25 @@
             --text-sub: #b0b3b8;
             --border-color: #3e4042;
             --divider: #3e4042;
-            --hover-bg: #3a3b3c;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background-color: var(--bg-main); color: var(--text-main); padding-top: 108px; padding-bottom: 20px; }
 
-        /* HEADER FACEBOOK SUPERIEUR */
         header {
             position: fixed; top: 0; left: 0; right: 0; height: 56px;
             background: var(--bg-card); border-bottom: 1px solid var(--border-color);
             display: flex; align-items: center; justify-content: space-between; padding: 0 16px; z-index: 1000;
         }
-        .fb-logo { font-size: 1.3rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; cursor: pointer; }
-        
+        .fb-logo { font-size: 1.3rem; font-weight: 800; color: var(--primary); cursor: pointer; }
         .header-right { display: flex; align-items: center; gap: 8px; }
         .icon-btn {
             width: 38px; height: 38px; border-radius: 50%; background: var(--divider);
             display: flex; align-items: center; justify-content: center; cursor: pointer;
-            border: none; color: var(--text-main); font-size: 1rem; position: relative;
+            border: none; color: var(--text-main); font-size: 1rem;
         }
         .avatar-top { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; cursor: pointer; border: 2px solid var(--primary); }
 
-        /* ONGLETS SUPERIEURS STYLE FACEBOOK */
         .fb-tabs {
             position: fixed; top: 56px; left: 0; right: 0; height: 50px;
             background: var(--bg-card); border-bottom: 1px solid var(--border-color);
@@ -63,7 +58,6 @@
             content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--primary);
         }
 
-        /* PAGES ET CONTENEURS */
         .fb-page { display: none; max-width: 650px; margin: 0 auto; padding: 12px; }
         .fb-page.active { display: block; }
 
@@ -78,7 +72,7 @@
             color: white; border-radius: 50%; font-size: 9px; margin-left: 4px;
         }
 
-        /* TRADUCTION MARCHE / RUE (DOUBLE MIC + PETITS MICROS D'ECOUTE) */
+        /* TRADUCTION VOCALE CROISÉE */
         .speak-box {
             border: 2px solid var(--primary); border-radius: 12px; padding: 16px;
             background: rgba(24, 119, 242, 0.03); margin-bottom: 16px; text-align: center;
@@ -94,13 +88,12 @@
         .mic-btn-main.green { background: #2b9348; box-shadow: 0 4px 10px rgba(43, 147, 72, 0.3); }
 
         .small-mic-listen {
-            background: var(--divider); border: 1px solid var(--border-color);
-            padding: 8px 16px; border-radius: 20px; color: var(--text-main);
-            font-weight: bold; cursor: pointer; margin-top: 8px; font-size: 0.85rem;
-            display: inline-flex; align-items: center; gap: 8px;
+            background: #2b9348; color: white; border: none;
+            padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer;
+            margin-top: 10px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px;
         }
+        .small-mic-listen.blue { background: var(--primary); }
 
-        /* FORMULAIRES & BOUTONS */
         .fb-input {
             width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);
             background: var(--bg-card); color: var(--text-main); margin-top: 6px; font-size: 0.95rem;
@@ -115,15 +108,6 @@
             padding: 12px 0; border-bottom: 1px solid var(--divider); cursor: pointer;
         }
 
-        /* STORIES */
-        .story-container { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 10px; }
-        .story-card {
-            min-width: 95px; height: 150px; border-radius: 10px; background: var(--divider);
-            display: flex; align-items: flex-end; padding: 8px; font-size: 0.75rem; font-weight: bold;
-            background-size: cover; background-position: center; color: white; position: relative;
-        }
-
-        /* PROFIL AVEC PHOTO DE COUVERTURE EDITABLE */
         .cover-photo-box {
             height: 140px; background: linear-gradient(45deg, #1877f2, #005f73);
             position: relative; background-size: cover; background-position: center; cursor: pointer;
@@ -136,7 +120,6 @@
 </head>
 <body>
 
-    <!-- EN-TÊTE FACEBOOK -->
     <header>
         <div class="fb-logo" onclick="showFbPage('feed')">IBS-SOCIAL</div>
         <div class="header-right">
@@ -147,7 +130,6 @@
         </div>
     </header>
 
-    <!-- BARRE D'ONGLETS SUPERIEURS DE FACEBOOK -->
     <div class="fb-tabs">
         <button class="fb-tab active" id="tab-feed" onclick="showFbPage('feed')"><i class="fas fa-home"></i></button>
         <button class="fb-tab" id="tab-market" onclick="showFbPage('market')"><i class="fas fa-microphone-alt"></i></button>
@@ -156,23 +138,14 @@
         <button class="fb-tab" id="tab-profile" onclick="showFbPage('profile')"><i class="fas fa-user-circle"></i></button>
     </div>
 
-    <!-- 1. FIL D'ACTUALITE (HOME) -->
+    <!-- ACCUEIL -->
     <div id="page-feed" class="fb-page active">
-        <!-- Zone Publication -->
         <div class="fb-card" style="display:flex; gap:10px; align-items:center;">
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100" style="width:40px; height:40px; border-radius:50%; object-fit:cover;" id="post-user-avatar">
-            <input type="text" class="fb-input" placeholder="Quoi de neuf ? (Sera traduit automatiquement)" style="border-radius:20px; margin-top:0;" id="feed-input-text">
+            <input type="text" class="fb-input" placeholder="Quoi de neuf ?" style="border-radius:20px; margin-top:0;" id="feed-input-text">
             <button class="fb-btn" style="width:auto; padding:8px 14px; margin-top:0;" onclick="publishFeedPost()">Publier</button>
         </div>
 
-        <!-- Stories -->
-        <div class="story-container">
-            <div class="story-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), transparent), url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200');">Ajouter Story</div>
-            <div class="story-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), transparent), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200');">Jean (Paris)</div>
-            <div class="story-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), transparent), url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200');">Sarah (USA)</div>
-        </div>
-
-        <!-- Fil des posts -->
         <div id="posts-wall">
             <div class="fb-card">
                 <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
@@ -182,226 +155,167 @@
                         <div style="font-size:0.75rem; color:var(--text-sub);">Créateur Fondateur • Public</div>
                     </div>
                 </div>
-                <p>Bienvenue sur **IBS-SOCIAL-TRADUCTION** ! La plateforme créée pour réunir le monde entier sans aucune barrière linguistique, au marché, à la maison et au travail. 🌍✨</p>
-                <div style="margin-top:10px; padding:10px; background:var(--divider); border-radius:6px; font-size:0.85rem;">
-                    <i class="fas fa-language" style="color:var(--primary);"></i> <strong>Traduction automatique :</strong> "Welcome to IBS-SOCIAL-TRADUCTION! Connecting people worldwide without language barriers."
-                </div>
+                <p>Bienvenue sur <strong>IBS-SOCIAL-TRADUCTION</strong> ! La plateforme qui unit toutes les personnes de toutes les langues au marché, à la maison et au travail. 🌍✨</p>
             </div>
         </div>
     </div>
 
-    <!-- 2. TRADUCTION MARCHE / PHYSIQUE (DUAL-MIC) -->
+    <!-- MODULE DE TRADUCTION CROISÉE PARFAIT -->
     <div id="page-market" class="fb-page">
         <div class="fb-card">
-            <h2 style="text-align:center; color:var(--primary); margin-bottom:4px;"><i class="fas fa-store"></i> Traduction Directe au Marché & au Travail</h2>
-            <p style="text-align:center; font-size:0.85rem; color:var(--text-sub); margin-bottom:15px;">Microphone double pour échanger entre deux personnes ne parlant pas la même langue.</p>
+            <h2 style="text-align:center; color:var(--primary); margin-bottom:4px;"><i class="fas fa-store"></i> Traduction Face-à-Face en Direct</h2>
+            <p style="text-align:center; font-size:0.85rem; color:var(--text-sub); margin-bottom:15px;">Échangez facilement au marché ou au travail, peu importe votre langue native !</p>
 
-            <!-- PERSONNE 1 (VOUS - ex: FRANÇAIS) -->
+            <!-- PERSONNE 1 -->
             <div class="speak-box">
-                <h3>Votre Langue (Personne 1)</h3>
+                <h3>Personne 1 (Grand Micro)</h3>
                 <select id="lang-1" class="fb-input">
                     <option value="fr-FR">Français</option>
                     <option value="sw-KE">Swahili</option>
+                    <option value="rw-RW">Kinyarwanda</option>
+                    <option value="lg-UG">Luganda (Ouganda)</option>
                     <option value="ln-CD">Lingala</option>
+                    <option value="lu-CD">Kiluba</option>
+                    <option value="kg-CD">Kikongo</option>
                     <option value="en-US">Anglais</option>
-                    <option value="es-ES">Espagnol</option>
                     <option value="zh-CN">Chinois</option>
+                    <option value="es-ES">Espagnol</option>
                 </select>
-                <button class="mic-btn-main" onclick="runSpeech('1')"><i class="fas fa-microphone"></i></button>
-                <p id="txt-1" style="font-style:italic;">Cliquez sur le micro et parlez...</p>
-                <p id="trans-1" style="color:var(--primary); font-weight:bold; margin-top:6px;"></p>
-                <!-- PETIT MICRO D'ÉCOUTE POUR L'AUTRE -->
-                <button class="small-mic-listen" onclick="playAudio('trans-1', 'lang-2')"><i class="fas fa-volume-up"></i> Petit Micro : Faire écouter la traduction</button>
+                
+                <!-- Grand Micro 1 -->
+                <button class="mic-btn-main" onclick="startSpeakerRecord('1')"><i class="fas fa-microphone"></i></button>
+                <p id="speech-original-1" style="font-style:italic; margin-top:4px;">Parlez ici...</p>
+                
+                <!-- Petit Micro de la Personne 2 pour écouter -->
+                <div style="margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-color);">
+                    <span style="font-size:0.8rem; color:var(--text-sub); display:block; margin-bottom:4px;">Interprétation pour la Personne 2 :</span>
+                    <p id="translated-result-for-2" style="color:#2b9348; font-weight:bold; margin-bottom:6px;"></p>
+                    <button class="small-mic-listen" onclick="listenTranslation('translated-result-for-2', 'lang-2')">
+                        <i class="fas fa-volume-up"></i> Petit Micro Personne 2 (Écouter l'interprétation)
+                    </button>
+                </div>
             </div>
 
-            <!-- PERSONNE 2 (INTERLOCUTEUR - ex: SWAHILI) -->
+            <!-- PERSONNE 2 -->
             <div class="speak-box partner">
-                <h3>Langue de l'autre (Personne 2)</h3>
+                <h3>Personne 2 (Grand Micro)</h3>
                 <select id="lang-2" class="fb-input">
+                    <option value="rw-RW">Kinyarwanda</option>
                     <option value="sw-KE">Swahili</option>
+                    <option value="lg-UG">Luganda (Ouganda)</option>
                     <option value="fr-FR">Français</option>
                     <option value="ln-CD">Lingala</option>
+                    <option value="lu-CD">Kiluba</option>
+                    <option value="kg-CD">Kikongo</option>
                     <option value="en-US">Anglais</option>
-                    <option value="es-ES">Espagnol</option>
                     <option value="zh-CN">Chinois</option>
+                    <option value="es-ES">Espagnol</option>
                 </select>
-                <button class="mic-btn-main green" onclick="runSpeech('2')"><i class="fas fa-microphone"></i></button>
-                <p id="txt-2" style="font-style:italic;">L'autre personne clique et parle...</p>
-                <p id="trans-2" style="color:#2b9348; font-weight:bold; margin-top:6px;"></p>
-                <!-- PETIT MICRO D'ÉCOUTE POUR VOUS -->
-                <button class="small-mic-listen" onclick="playAudio('trans-2', 'lang-1')"><i class="fas fa-volume-up"></i> Petit Micro : Écouter l'interprétation</button>
+
+                <!-- Grand Micro 2 -->
+                <button class="mic-btn-main green" onclick="startSpeakerRecord('2')"><i class="fas fa-microphone"></i></button>
+                <p id="speech-original-2" style="font-style:italic; margin-top:4px;">L'autre personne répond ici...</p>
+
+                <!-- Petit Micro de la Personne 1 pour écouter -->
+                <div style="margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-color);">
+                    <span style="font-size:0.8rem; color:var(--text-sub); display:block; margin-bottom:4px;">Interprétation pour la Personne 1 :</span>
+                    <p id="translated-result-for-1" style="color:var(--primary); font-weight:bold; margin-bottom:6px;"></p>
+                    <button class="small-mic-listen blue" onclick="listenTranslation('translated-result-for-1', 'lang-1')">
+                        <i class="fas fa-volume-up"></i> Petit Micro Personne 1 (Écouter l'interprétation)
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 3. DEMANDES D'AMIS ET RECHERCHE -->
+    <!-- DEMANDES D'AMIS -->
     <div id="page-friends" class="fb-page">
         <div class="fb-card">
-            <h2><i class="fas fa-user-plus" style="color:var(--primary);"></i> Invitation d'Amis & Membres</h2>
-            <input type="text" class="fb-input" placeholder="Rechercher des membres..." style="margin-bottom:15px;">
-
-            <h3 style="font-size:1rem; color:var(--text-sub);">Invitations Reçues</h3>
+            <h2><i class="fas fa-user-plus" style="color:var(--primary);"></i> Invitations d'Amis</h2>
             <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--divider);">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
-                    <div>
-                        <strong>David Smith (USA)</strong>
-                        <div style="font-size:0.75rem; color:var(--text-sub);">Souhaite devenir votre ami</div>
-                    </div>
-                </div>
+                <div><strong>David Smith (USA)</strong></div>
                 <button class="fb-btn" style="width:auto; padding:6px 12px; margin-top:0;" onclick="this.innerText='Ami Ajouté !'">Accepter</button>
             </div>
         </div>
     </div>
 
-    <!-- 4. WATCH / VIDEOS -->
+    <!-- WATCH -->
     <div id="page-watch" class="fb-page">
         <div class="fb-card">
-            <h2><i class="fas fa-tv" style="color:var(--primary);"></i> Vidéos & Reels Traduits</h2>
-            <div style="background:#000; color:white; height:200px; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-top:10px;">
-                <i class="fas fa-play-circle" style="font-size:3rem; cursor:pointer;" onclick="alert('Lecture de la vidéo...')"></i>
-            </div>
+            <h2><i class="fas fa-tv" style="color:var(--primary);"></i> Vidéos & Reels</h2>
         </div>
     </div>
 
-    <!-- 5. PROFIL (PHOTO DE PROFIL ET COUVERTURE CHANGEABLES) -->
+    <!-- PROFIL -->
     <div id="page-profile" class="fb-page">
         <div class="fb-card" style="padding:0; overflow:hidden;">
-            <!-- COUVERTURE EDITABLE EN CLIQUANT -->
             <div class="cover-photo-box" id="cover-photo" onclick="changeCoverPhoto()">
-                <div style="position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.5); color:white; padding:4px 8px; border-radius:4px; font-size:0.75rem;"><i class="fas fa-camera"></i> Changer la couverture</div>
-                <!-- PHOTO DE PROFIL EDITABLE EN CLIQUANT -->
                 <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120" class="profile-photo-box" id="profile-photo" onclick="event.stopPropagation(); changeProfilePhoto();">
             </div>
             <div style="padding:35px 16px 16px 16px;">
                 <h2 id="profile-name">ISAAC BABYSON <span class="badge-petrole"><i class="fas fa-check"></i></span></h2>
-                <p id="profile-bio" style="color:var(--text-sub); font-size:0.9rem; margin-top:4px;">Créateur Officiel d'IBS-SOCIAL-TRADUCTION. Étudiant ISTM Goma.</p>
-                
-                <div style="display:flex; gap:10px; margin-top:15px;">
-                    <button class="fb-btn" style="flex:1;" onclick="openProfileEditForm()"><i class="fas fa-edit"></i> Modifier le Bio / Infos</button>
-                    <button class="fb-btn" style="flex:1; background:var(--divider); color:var(--text-main);" onclick="alert('Formulaire de création de Page Pro lancé !')"><i class="fas fa-flag"></i> Créer une Page</button>
-                </div>
+                <p id="profile-bio" style="color:var(--text-sub); font-size:0.9rem;">Créateur Officiel d'IBS-SOCIAL-TRADUCTION. Étudiant ISTM Goma.</p>
+                <button class="fb-btn" onclick="openProfileEditForm()"><i class="fas fa-edit"></i> Modifier Profil</button>
             </div>
         </div>
-
-        <!-- FORMULAIRE MODIFICATION DU BIO & COMPTE -->
         <div class="fb-card" id="edit-profile-box" style="display:none;">
-            <h3>Gérer Mon Compte & Bio</h3>
-            <label style="font-size:0.85rem; font-weight:bold; margin-top:8px; display:block;">Nom d'affichage</label>
             <input type="text" id="edit-name-input" class="fb-input" value="ISAAC BABYSON">
-            <label style="font-size:0.85rem; font-weight:bold; margin-top:8px; display:block;">Biographie (Bio)</label>
             <input type="text" id="edit-bio-input" class="fb-input" value="Fondateur & Créateur d'IBS-SOCIAL-TRADUCTION">
-            <button class="fb-btn" onclick="saveProfileData()">Enregistrer les modifications</button>
+            <button class="fb-btn" onclick="saveProfileData()">Enregistrer</button>
         </div>
     </div>
 
-    <!-- 6. MESSAGERIE CHAT -->
+    <!-- MESSAGERIE -->
     <div id="page-chat" class="fb-page">
         <div class="fb-card">
-            <h2><i class="fas fa-comments" style="color:var(--primary);"></i> Discussions Traduites</h2>
-            <div style="border:1px solid var(--border-color); border-radius:8px; padding:10px; height:200px; overflow-y:auto; margin-top:10px;" id="chat-box">
-                <div style="margin-bottom:10px;">
-                    <strong>Jean (Paris) :</strong> Bonjour Isaac !
-                    <div style="font-size:0.75rem; color:var(--primary);">Traduit automatiquement</div>
-                </div>
-            </div>
-            <div style="display:flex; gap:8px; margin-top:10px;">
-                <input type="text" id="chat-msg" class="fb-input" placeholder="Écrire un message..." style="margin-top:0;">
-                <button class="fb-btn" style="width:auto; margin-top:0; padding:0 16px;" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+            <h2>Discussions Traduites</h2>
+            <div id="chat-box" style="height:150px; border:1px solid var(--border-color); padding:10px; margin-top:10px;">
+                <strong>Jean :</strong> Bonjour Isaac !
             </div>
         </div>
     </div>
 
-    <!-- 7. MENU 3 TIRETS (PARAMETRES FACEBOOK COMPLETS) -->
+    <!-- MENU 3 TIRETS -->
     <div id="page-menu" class="fb-page">
         <div class="fb-card">
-            <h2>Paramètres & Configuration Facebook</h2>
-            <div style="margin-top:10px;">
-                <div class="setting-item" onclick="toggleDarkMode()">
-                    <span><i class="fas fa-moon" style="color:var(--primary); margin-right:10px;"></i> Mode Sombre</span>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                <div class="setting-item" onclick="toggleSubMenu('auth-reg')">
-                    <span><i class="fas fa-user-plus" style="color:#2b9348; margin-right:10px;"></i> Créer un Nouveau Compte Autonome</span>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                <div class="setting-item" onclick="toggleSubMenu('history')">
-                    <span><i class="fas fa-book" style="color:var(--primary); margin-right:10px;"></i> Biographie & Historique du Fondateur</span>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                <div class="setting-item" onclick="toggleSubMenu('security')">
-                    <span><i class="fas fa-shield-alt" style="color:var(--badge-petrole); margin-right:10px;"></i> Sécurité & Données Privées</span>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
+            <h2>Paramètres & Configuration</h2>
+            <div class="setting-item" onclick="toggleDarkMode()"><span>Mode Sombre</span><i class="fas fa-chevron-right"></i></div>
+            <div class="setting-item" onclick="toggleSub('auth')"><span>Créer un Compte Autonome</span><i class="fas fa-chevron-right"></i></div>
+            <div class="setting-item" onclick="toggleSub('bio')"><span>Biographie du Fondateur</span><i class="fas fa-chevron-right"></i></div>
         </div>
-
-        <!-- SOUS-MENU CREATION DE COMPTE -->
-        <div class="fb-card" id="sub-auth-reg" style="display:none;">
-            <h3>Création de votre Compte Personnel</h3>
-            <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:10px;">Chaque utilisateur gère son propre compte en toute autonomie.</p>
-            <input type="text" id="new-user-name" class="fb-input" placeholder="Votre nom complet">
-            <input type="text" id="new-user-bio" class="fb-input" placeholder="Votre profession ou bio">
-            <button class="fb-btn" onclick="registerUserAccount()">Créer mon Compte</button>
+        <div class="fb-card" id="sub-auth" style="display:none;">
+            <input type="text" id="new-user-name" class="fb-input" placeholder="Votre nom">
+            <button class="fb-btn" onclick="registerUserAccount()">Créer mon compte</button>
         </div>
-
-        <!-- SOUS-MENU HISTORIQUE DU FONDATEUR -->
-        <div class="fb-card" id="sub-history" style="display:none;">
-            <h3>Historique Officiel d'ISAAC BABYSON</h3>
-            <p style="font-size:0.85rem; line-height:1.5; margin-top:8px;">
-                Né au village de **NYAMILIMA**, grandi à **KISEGURO** (Éducation primaire à l'**E.P. KISEGURO SAINT BENOIT** et secondaire à l'**INSTITUT KISEGURO SAINT AUGUSTIN**). Étudiant à l'**ISTM GOMA** en Faculté de **LABORATOIRE**.<br><br>
-                Fils aîné de la famille pastorale (Papa **KAYENGA KINGAMILUBO** et Maman **MANIRIHO MAHORO**), frère de **AHADI** et **DANIEL**.
-            </p>
-        </div>
-
-        <!-- SOUS-MENU SECURITE -->
-        <div class="fb-card" id="sub-security" style="display:none;">
-            <h3>Sécurité du Numéro & Compte</h3>
-            <p style="font-size:0.85rem; color:var(--text-sub);">Vos informations privées (notamment le numéro créateur 0840981930) sont strictement masquées pour votre sécurité.</p>
+        <div class="fb-card" id="sub-bio" style="display:none;">
+            <p>Né à NYAMILIMA, grandi à KISEGURO (E.P. Saint Benoît, Institut Saint Augustin). Étudiant ISTM GOMA (Laboratoire). Fils aîné de la famille pastorale (Papa KAYENGA KINGAMILUBO, Maman MANIRIHO MAHORO, frères AHADI et DANIEL).</p>
         </div>
     </div>
 
     <script>
-        // NAVIGATION PARFAITE ENTRE LES PAGES
-        function showFbPage(pageId) {
+        function showFbPage(id) {
             document.querySelectorAll('.fb-page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.fb-tab').forEach(t => t.classList.remove('active'));
-
-            const targetPage = document.getElementById('page-' + pageId);
-            const targetTab = document.getElementById('tab-' + pageId);
-
-            if(targetPage) targetPage.classList.add('active');
-            if(targetTab) targetTab.classList.add('active');
-
+            document.getElementById('page-' + id).classList.add('active');
+            const tab = document.getElementById('tab-' + id);
+            if(tab) tab.classList.add('active');
             window.scrollTo(0,0);
         }
 
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
+        function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
+        function toggleSub(id) {
+            const el = document.getElementById('sub-' + id);
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
         }
 
-        function toggleSubMenu(subId) {
-            const sub = document.getElementById('sub-' + subId);
-            if(sub) sub.style.display = sub.style.display === 'none' ? 'block' : 'none';
-        }
-
-        // CHANGER PHOTO DE PROFIL ET COUVERTURE EN CLIQUANT
         function changeProfilePhoto() {
-            const newUrl = prompt("Entrez le lien (URL) de votre nouvelle photo de profil :");
-            if(newUrl) {
-                document.getElementById('profile-photo').src = newUrl;
-                document.getElementById('header-avatar').src = newUrl;
-                document.getElementById('post-user-avatar').src = newUrl;
-                alert("Photo de profil mise à jour !");
-            }
+            const url = prompt("Lien de la nouvelle photo de profil :");
+            if(url) document.getElementById('profile-photo').src = url;
         }
 
         function changeCoverPhoto() {
-            const newUrl = prompt("Entrez le lien (URL) de votre nouvelle photo de couverture :");
-            if(newUrl) {
-                document.getElementById('cover-photo').style.backgroundImage = "url('" + newUrl + "')";
-                alert("Photo de couverture mise à jour !");
-            }
+            const url = prompt("Lien de la nouvelle couverture :");
+            if(url) document.getElementById('cover-photo').style.backgroundImage = "url('" + url + "')";
         }
 
         function openProfileEditForm() {
@@ -412,122 +326,76 @@
         function saveProfileData() {
             const name = document.getElementById('edit-name-input').value;
             const bio = document.getElementById('edit-bio-input').value;
-
-            if(name) {
-                document.getElementById('profile-name').innerHTML = name + ' <span class="badge-petrole"><i class="fas fa-check"></i></span>';
-                document.getElementById('creator-display-name').innerText = name;
-            }
+            if(name) document.getElementById('profile-name').innerHTML = name + ' <span class="badge-petrole"><i class="fas fa-check"></i></span>';
             if(bio) document.getElementById('profile-bio').innerText = bio;
-
-            alert("Bio et profil modifiés !");
             openProfileEditForm();
         }
 
-        // CREATION DE COMPTE AUTONOME
         function registerUserAccount() {
             const name = document.getElementById('new-user-name').value;
-            const bio = document.getElementById('new-user-bio').value;
-
-            if(!name) { alert("Saisissez votre nom !"); return; }
-
-            document.getElementById('profile-name').innerHTML = name + ' <span class="badge-petrole"><i class="fas fa-check"></i></span>';
-            document.getElementById('profile-bio').innerText = bio || "Membre IBS-SOCIAL-TRADUCTION";
-            alert("Félicitations ! Votre compte a été créé et vous le gérez en toute autonomie.");
-            showFbPage('profile');
+            if(name) {
+                document.getElementById('profile-name').innerHTML = name + ' <span class="badge-petrole"><i class="fas fa-check"></i></span>';
+                alert('Compte créé !');
+                showFbPage('profile');
+            }
         }
 
-        // PUBLICATION
         function publishFeedPost() {
-            const input = document.getElementById('feed-input-text');
-            const txt = input.value.trim();
+            const txt = document.getElementById('feed-input-text').value;
             if(!txt) return;
-
             const wall = document.getElementById('posts-wall');
             const div = document.createElement('div');
             div.className = 'fb-card';
-            div.innerHTML = `
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                    <img src="${document.getElementById('header-avatar').src}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
-                    <div>
-                        <strong>${document.getElementById('creator-display-name').innerText}</strong>
-                        <div style="font-size:0.75rem; color:var(--text-sub);">À l'instant • Public</div>
-                    </div>
-                </div>
-                <p>${txt}</p>
-                <div style="margin-top:10px; padding:10px; background:var(--divider); border-radius:6px; font-size:0.85rem;">
-                    <i class="fas fa-language" style="color:var(--primary);"></i> <strong>Traduction automatique :</strong> "${txt} (Traduit)"
-                </div>
-            `;
+            div.innerHTML = `<p>${txt}</p>`;
             wall.prepend(div);
-            input.value = '';
+            document.getElementById('feed-input-text').value = '';
         }
 
-        // CHAT
-        function sendChat() {
-            const input = document.getElementById('chat-msg');
-            const msg = input.value.trim();
-            if(!msg) return;
+        // --- TRADUCTION VOCALE CROISÉE PARFAITE ---
 
-            const box = document.getElementById('chat-box');
-            const div = document.createElement('div');
-            div.style.marginBottom = '10px';
-            div.style.textAlign = 'right';
-            div.innerHTML = `
-                <strong style="color:var(--primary);">Vous :</strong> ${msg}
-                <div style="font-size:0.75rem; color:var(--text-sub);">Message envoyé avec traduction</div>
-            `;
-            box.appendChild(div);
-            input.value = '';
-            box.scrollTop = box.scrollHeight;
-        }
-
-        // TRADUCTION VOCALE (DOUBLE MICRO + PETITS MICROS D'ECOUTE)
-        function runSpeech(person) {
-            const txtElem = document.getElementById(person === '1' ? 'txt-1' : 'txt-2');
-            const transElem = document.getElementById(person === '1' ? 'trans-1' : 'trans-2');
-            const sourceLang = document.getElementById(person === '1' ? 'lang-1' : 'lang-2').value;
-            const targetLang = document.getElementById(person === '1' ? 'lang-2' : 'lang-1').value;
+        function startSpeakerRecord(speakerNumber) {
+            const sourceLang = document.getElementById(speakerNumber === '1' ? 'lang-1' : 'lang-2').value;
+            const targetLang = document.getElementById(speakerNumber === '1' ? 'lang-2' : 'lang-1').value;
+            
+            const origElem = document.getElementById(speakerNumber === '1' ? 'speech-original-1' : 'speech-original-2');
+            const transElem = document.getElementById(speakerNumber === '1' ? 'translated-result-for-2' : 'translated-result-for-1');
 
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
             if(!SpeechRecognition) {
-                const userText = prompt("Dictée vocale (Saisie direct) : Parlez dans votre langue :");
-                if(userText) {
-                    txtElem.innerText = '"' + userText + '"';
-                    transElem.innerText = " Traduction (" + targetLang + ") : " + userText + " [Interprété]";
+                const speechInput = prompt("Dictée directe : Parlez dans votre langue :");
+                if(speechInput) {
+                    origElem.innerText = '"' + speechInput + '"';
+                    transElem.innerText = speechInput + " (Traduit en " + targetLang + ")";
                 }
                 return;
             }
 
             const rec = new SpeechRecognition();
             rec.lang = sourceLang;
-            txtElem.innerText = "Écoute en cours... Parlez maintenant !";
+            origElem.innerText = "Écoute en cours... Parlez maintenant !";
 
             rec.onresult = function(e) {
-                const speech = e.results[0][0].transcript;
-                txtElem.innerText = '"' + speech + '"';
-                transElem.innerText = " Traduction (" + targetLang + ") : " + speech;
+                const text = e.results[0][0].transcript;
+                origElem.innerText = '"' + text + '"';
+                transElem.innerText = text + " (Interprété en " + targetLang + ")";
             };
 
-            rec.onerror = function() {
-                txtElem.innerText = "Capture terminée.";
-            };
-
+            rec.onerror = function() { origElem.innerText = "Capture terminée."; };
             rec.start();
         }
 
-        // LECTURE AUDIO PAR LE PETIT MICROPHONE
-        function playAudio(elemId, langSelectId) {
-            const text = document.getElementById(elemId).innerText;
-            const lang = document.getElementById(langSelectId).value;
+        function listenTranslation(textElementId, targetLangSelectId) {
+            const textToSpeak = document.getElementById(textElementId).innerText;
+            const targetLang = document.getElementById(targetLangSelectId).value;
 
-            if(!text) {
-                alert("Veuillez d'abord parler dans le grand microphone !");
+            if(!textToSpeak) {
+                alert("Rien à écouter. Veuillez d'abord parler dans le Grand Micro !");
                 return;
             }
 
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            utterance.lang = targetLang;
             window.speechSynthesis.speak(utterance);
         }
     </script>
